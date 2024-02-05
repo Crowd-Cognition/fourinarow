@@ -1,4 +1,4 @@
-// import {uploadData} from 'aws-amplify/storage';
+import {uploadData} from 'aws-amplify/storage';
 
 function finish_experiment(){
 	show_instructions(0,instructions_text_finished,instructions_urls_finished,function(){
@@ -19,19 +19,19 @@ async function save(data, filename) {
 	elem.click();
 	document.body.removeChild(elem);
 
-	// try {
-	// 	const result = await uploadData({
-	// 		key: filename,
-	// 		data: blob,
-	// 		options: {
-	// 			accessLevel: 'guest',
-	// 			onProgress
-	// 		}
-	// 	}).result;
-	// 	console.log('Success:', result);
-	// } catch (error) {
-	// 	console.log("error: ", error)
-	// }
+	try {
+		const result = await uploadData({
+			key: filename,
+			data: blob,
+			options: {
+				accessLevel: 'guest',
+				onProgress
+			}
+		}).result;
+		console.log('Success:', result);
+	} catch (error) {
+		console.log("error: ", error)
+	}
 }
 
 function log_data(data){
