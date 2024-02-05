@@ -5,7 +5,7 @@ function finish_experiment(){
 }
 
 function get_image_path(filename){
-	return "../static/images/" + filename;
+	return "static/images/" + filename;
 }
 
 function save(data,filename){

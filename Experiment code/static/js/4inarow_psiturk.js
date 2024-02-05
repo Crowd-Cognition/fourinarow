@@ -104,5 +104,5 @@ function handleError(e) {
 };
 
 function get_image_path(filename){
-	return "../static/images/" + filename;
+	return "static/images/" + filename;
 }
