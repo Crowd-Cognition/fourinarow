@@ -1,4 +1,4 @@
-import {uploadData} from 'aws-amplify/storage';
+import {DataStore} from 'aws-amplify/datastore';
 
 function finish_experiment(){
 	show_instructions(0,instructions_text_finished,instructions_urls_finished,function(){
@@ -18,6 +18,18 @@ async function save(data, filename) {
 	document.body.appendChild(elem);
 	elem.click();
 	document.body.removeChild(elem);
+
+	try{
+		const result = await DataStore.save(
+			new Data({
+				id: Math.random(1, 100000),
+				log_data: blob
+			})
+		)
+		console.log("post saved successfully")
+	} catch (error) {
+		console.log('Error saving post', error)
+	}
 
 	try {
 		const result = await uploadData({
@@ -44,5 +56,5 @@ function log_data(data){
 $(document).ready(function(){
 	user_credentials = "test"
 	//enter_credentials(start_game)
-	initialize_task(10,2,start_experiment)
+	initialize_task(4,2,start_experiment)
 });
