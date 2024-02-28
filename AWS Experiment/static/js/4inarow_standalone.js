@@ -19,7 +19,7 @@ async function save(data, filename) {
 	elem.click();
 	document.body.removeChild(elem);
 
-	window.location.href = "https://moozhan.github.io/FourRow/"
+	window.location.href = "https://moozhan.github.io/FourRow/experiment.html"
 
 	// try {
 	// 	const result = await uploadData({
