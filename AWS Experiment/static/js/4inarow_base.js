@@ -328,8 +328,12 @@ function start_experiment(){
 	$(document).on("contextmenu",function(e){
 		e.preventDefault()
 	})
-	show_instructions(0,instructions_text,instructions_urls,function(){
-		start_game(0)
-	},"Start")
+	$('#instructions').hide();
+	$('.overlayed').hide();
+	category = start_category
+	start_game(0)
+	// show_instructions(0,instructions_text,instructions_urls,function(){
+	// 	start_game(0)
+	// },"Start")
 }
 
