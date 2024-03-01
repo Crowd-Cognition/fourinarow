@@ -1,10 +1,10 @@
 var client
 
 import { Amplify } from 'aws-amplify';
-import amplifyconfig from '../../amplifyconfiguration.json'
+import amplifyconfig from './src/amplifyconfiguration.json'
 
 import { generateClient } from 'aws-amplify/api';
-import { createUserLog } from '../../graphql/mutations';
+import { createUserLog } from './src/graphql/mutations';
 
 
 export function finish_experiment(){
