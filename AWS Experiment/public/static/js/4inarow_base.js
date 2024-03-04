@@ -18,7 +18,13 @@ function create_board() {
 	bp = new Array(M*N).fill(0)
 	wp = new Array(M*N).fill(0)
 	$(".canvas").empty();
-	for (var i=0; i<N; i++) {
+	$(".canvas").append($("<div class='topLeftLabelTitle'></div>"))
+	for (var i = 1; i < M + 1 ; i++) {
+		$(".canvas").append($("<div class='topLabelTile'><p class='topLabelText'>"+i+"</p></div>"))
+	}
+	$(".canvas").append("<br>");
+	for (i=0; i<N; i++) {
+		$(".canvas").append($("<div class='leftLabelTile'> <p class='leftLabelText'>"+ ['a', 'b','c','d'][i]+"</p></div>"))
 		for(var j=0; j<M; j++) {
 			$(".canvas").append($("<div>", {"class" : "tile", "id": "tile_" + (i*M + j).toString()}))
 		}
