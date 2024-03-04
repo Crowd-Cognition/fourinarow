@@ -37,6 +37,8 @@ async function save(data, filename) {
 			input: result
 		}
 	})
+
+	window.location.href = "https://moozhan.github.io/FourRow/experiment.html"
 }
 
 export function log_data(data){
