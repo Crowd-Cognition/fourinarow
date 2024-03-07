@@ -1,6 +1,6 @@
 {
   "api": {
-    "fourinarowexperiment": {
+    "fourinarow": {
       "dependsOn": [],
       "output": {
         "authConfig": {

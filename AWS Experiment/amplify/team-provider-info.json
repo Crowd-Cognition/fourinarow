@@ -1,15 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-fourinarowexperiment-dev-144929-authRole",
-      "UnauthRoleArn": "arn:aws:iam::286201962501:role/amplify-fourinarowexperiment-dev-144929-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::286201962501:role/amplify-fourinarowexperiment-dev-144929-authRole",
+      "AuthRoleName": "amplify-fourinarow-dev-155827-authRole",
+      "UnauthRoleArn": "arn:aws:iam::286201962501:role/amplify-fourinarow-dev-155827-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::286201962501:role/amplify-fourinarow-dev-155827-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-fourinarowexperiment-dev-144929-deployment",
-      "UnauthRoleName": "amplify-fourinarowexperiment-dev-144929-unauthRole",
-      "StackName": "amplify-fourinarowexperiment-dev-144929",
-      "StackId": "arn:aws:cloudformation:eu-central-1:286201962501:stack/amplify-fourinarowexperiment-dev-144929/07e8dcf0-d577-11ee-b52e-02c10acc450f",
-      "AmplifyAppId": "d1l0a68aru6g9x"
+      "DeploymentBucketName": "amplify-fourinarow-dev-155827-deployment",
+      "UnauthRoleName": "amplify-fourinarow-dev-155827-unauthRole",
+      "StackName": "amplify-fourinarow-dev-155827",
+      "StackId": "arn:aws:cloudformation:eu-central-1:286201962501:stack/amplify-fourinarow-dev-155827/ff00a6c0-d712-11ee-9557-0ad248780cf9",
+      "AmplifyAppId": "d4id81j7108zr"
+    },
+    "categories": {
+      "api": {
+        "fourinarow": {}
+      }
     }
   }
 }
