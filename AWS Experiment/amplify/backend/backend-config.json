@@ -16,5 +16,30 @@
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
     }
+  },
+  "function": {
+    "sendData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_sendData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
+    },
+    "AMPLIFY_function_sendData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "sendData"
+        }
+      ]
+    }
   }
 }

@@ -14,6 +14,12 @@
     "categories": {
       "api": {
         "fourinarow": {}
+      },
+      "function": {
+        "sendData": {
+          "deploymentBucketName": "amplify-fourinarow-dev-155827-deployment",
+          "s3Key": "amplify-builds/sendData-3764416b465675532f4f-build.zip"
+        }
       }
     }
   }

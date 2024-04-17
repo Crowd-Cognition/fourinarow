@@ -330,7 +330,7 @@ function initialize_task(_num_games,_num_practice_games,callback){
 	callback()
 }
 
-function start_experiment(){
+async function start_experiment(){
 	makemove = Module.cwrap('makemove', 'number', ['number','string','string','number','number'])
 	$(document).on("contextmenu",function(e){
 		e.preventDefault()
@@ -338,6 +338,12 @@ function start_experiment(){
 	$('#instructions').hide();
 	$('.overlayed').hide();
 	category = start_category
+	const userResponse = await fetch("https://7rh93fhc7e.execute-api.eu-central-1.amazonaws.com/testStage/updateData", {
+		method: "POST", // *GET, POST, PUT, DELETE, etc.
+		mode: "cors", // no-cors, *cors, same-origin
+		credentials: "include", // include, *same-origin, omit
+		})
+	console.log(userResponse.headers)
 	start_game(0)
 	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
