@@ -338,13 +338,9 @@ async function start_experiment(){
 	$('#instructions').hide();
 	$('.overlayed').hide();
 	category = start_category
-	const userResponse = await fetch("https://7rh93fhc7e.execute-api.eu-central-1.amazonaws.com/testStage/updateData", {
-		method: "POST", // *GET, POST, PUT, DELETE, etc.
-		credentials: "include", // include, *same-origin, omit
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-		},
+	const userResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
+		method: "GET",
+		credentials: "include"// *GET, POST, PUT, DELETE, etc.
 	})
 
 	const newResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
