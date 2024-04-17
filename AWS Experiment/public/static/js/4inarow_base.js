@@ -348,12 +348,15 @@ async function start_experiment(){
 	})
 
 	const newResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
+		method: "GET", // *GET, POST, PUT, DELETE, etc.
+		credentials: "include", // include, *same-origin, omit
+
+	})
+
+	const newPostResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		credentials: "include", // include, *same-origin, omit
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-		},
+
 	})
 	console.log(newResponse.headers)
 	console.log(userResponse.headers)
