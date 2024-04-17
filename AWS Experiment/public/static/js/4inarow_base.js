@@ -340,9 +340,22 @@ async function start_experiment(){
 	category = start_category
 	const userResponse = await fetch("https://7rh93fhc7e.execute-api.eu-central-1.amazonaws.com/testStage/updateData", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
-		mode: "cors", // no-cors, *cors, same-origin
 		credentials: "include", // include, *same-origin, omit
-		})
+		headers: {
+			"Content-Type": "application/json",
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+
+	const newResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
+		method: "POST", // *GET, POST, PUT, DELETE, etc.
+		credentials: "include", // include, *same-origin, omit
+		headers: {
+			"Content-Type": "application/json",
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+	console.log(newResponse.headers)
 	console.log(userResponse.headers)
 	start_game(0)
 	// show_instructions(0,instructions_text,instructions_urls,function(){
