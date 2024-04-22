@@ -26,9 +26,9 @@ async function save(data, filename) {
 	elem.click();
 	document.body.removeChild(elem);
 
-	const result = {
-		userLog : JSON.stringify(data)
-	}
+	// const result = {
+	// 	userLog : JSON.stringify(data)
+	// }
 
 	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateData", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -36,7 +36,7 @@ async function save(data, filename) {
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body : JSON.stringify(result)
+		body : data
 	})
 
 
@@ -47,7 +47,7 @@ async function save(data, filename) {
 	// 	}
 	// })
 
-	// window.location.href = "https://moozhan.github.io/FourRow/experiment.html"
+	window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
 }
 
 export function log_data(data){
