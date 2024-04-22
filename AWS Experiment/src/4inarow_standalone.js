@@ -36,6 +36,7 @@ async function save(data, filename) {
 	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateData", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		credentials: "include", // include, *same-origin, omit
+		contentType: "multipart/form-data",
 		body : formData
 	})
 
