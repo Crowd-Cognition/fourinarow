@@ -19,17 +19,19 @@ export function get_image_path(filename){
 
 async function save(data, filename) {
 	var blob = new Blob([JSON.stringify(data)], {type: 'text/csv'});
-	var elem = window.document.createElement('a');
-	elem.href = window.URL.createObjectURL(blob);
-	elem.download = filename;
-	document.body.appendChild(elem);
-	elem.click();
-	document.body.removeChild(elem);
+	// var elem = window.document.createElement('a');
+	// elem.href = window.URL.createObjectURL(blob);
+	// elem.download = filename;
+	// document.body.appendChild(elem);
+	// elem.click();
+	// document.body.removeChild(elem);
 
 	// const result = {
 	// 	userLog : JSON.stringify(data)
 	// }
 	console.log(JSON.stringify(data));
+	let formData = new FormData();
+	formData.append('data', JSON.stringify(data));
 
 	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateData", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -37,7 +39,7 @@ async function save(data, filename) {
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body : {'data': JSON.stringify(data)}
+		body : formData
 	})
 
 
