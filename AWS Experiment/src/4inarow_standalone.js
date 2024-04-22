@@ -40,14 +40,14 @@ async function save(data, filename) {
 	})
 
 
-	client.graphql({
-		query: createUserLog,
-		variables: {
-			input: result
-		}
-	})
+	// client.graphql({
+	// 	query: createUserLog,
+	// 	variables: {
+	// 		input: result
+	// 	}
+	// })
 
-	window.location.href = "https://moozhan.github.io/FourRow/experiment.html"
+	// window.location.href = "https://moozhan.github.io/FourRow/experiment.html"
 }
 
 export function log_data(data){
