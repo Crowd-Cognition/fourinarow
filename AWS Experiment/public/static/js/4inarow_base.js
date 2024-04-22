@@ -338,22 +338,25 @@ async function start_experiment(){
 	$('#instructions').hide();
 	$('.overlayed').hide();
 	category = start_category
-	const userResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
-		method: "GET",
-		credentials: "include"// *GET, POST, PUT, DELETE, etc.
-	})
+	// const userResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
+	// 	method: "GET",
+	// 	credentials: "include"// *GET, POST, PUT, DELETE, etc.
+	// })
 
-	const newResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
+	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
 		method: "GET", // *GET, POST, PUT, DELETE, etc.
 		credentials: "include", // include, *same-origin, omit
-
 	})
 
-	const newPostResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
-		method: "POST", // *GET, POST, PUT, DELETE, etc.
-		credentials: "include", // include, *same-origin, omit
+	// if (newResponse.status===401) {
+	// 	window.location.href = "https://gleaming-sarong-crab.cyclic.app/login"
+	// }
 
-	})
+	// const newPostResponse = await fetch("https://gleaming-sarong-crab.cyclic.app/user", {
+	// 	method: "POST", // *GET, POST, PUT, DELETE, etc.
+	// 	credentials: "include", // include, *same-origin, omit
+	//
+	// })
 	console.log(newResponse.headers)
 	console.log(userResponse.headers)
 	start_game(0)

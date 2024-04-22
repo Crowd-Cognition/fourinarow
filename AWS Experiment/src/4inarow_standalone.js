@@ -27,9 +27,18 @@ async function save(data, filename) {
 	document.body.removeChild(elem);
 
 	const result = {
-		name : "hello",
-		log : JSON.stringify(data)
+		userLog : JSON.stringify(data)
 	}
+
+	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateData", {
+		method: "POST", // *GET, POST, PUT, DELETE, etc.
+		credentials: "include", // include, *same-origin, omit
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body : JSON.stringify(result)
+	})
+
 
 	client.graphql({
 		query: createUserLog,
