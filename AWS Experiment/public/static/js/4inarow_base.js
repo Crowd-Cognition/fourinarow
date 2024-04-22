@@ -358,7 +358,6 @@ async function start_experiment(){
 	//
 	// })
 	console.log(newResponse.headers)
-	console.log(userResponse.headers)
 	start_game(0)
 	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
