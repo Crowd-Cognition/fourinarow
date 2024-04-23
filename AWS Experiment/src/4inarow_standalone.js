@@ -50,7 +50,7 @@ async function save(data, filename) {
 	// 	}
 	// })
 
-	// window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
+	window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
 }
 
 export function log_data(data){
