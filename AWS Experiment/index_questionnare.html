@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <script type="text/javascript" src="./static/jsPsych/jspsych.js"></script>
+    <link href="./static/jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"/>
+    <!--	-->
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-html-button-response.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-survey-text.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-survey-multi-choice.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-survey-text.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-instructions.js"></script>
+    <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-call-function.js"></script>
+
+
+    <!--    <script src="https://unpkg.com/jspsych@7.3.4"></script>-->
+    <!--    <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.3"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-survey@1.0.1"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.4"></script>-->
+    <!--    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.3"></script>-->
+    <script src="./static/js/lib/jquery-2.2.4.min.js"></script>
+
+
+    <style>
+        #iframe-target {
+            width: 48vw;
+            height: 100vh;
+            float: left;
+            display: none;
+        }
+
+        #jspsych-target {
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            float: right;
+        }
+    </style>
+
+  <style>
+    body {
+      background-color: white;
+      color: black;
+    }
+  </style>
+
+    <!--    <script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>-->
+    <!--	<script type="text/javascript" src="lib/jspsych-pavlovia-2020.2.js"></script>-->
+
+    <script>
+        // extract workerID from URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var workerID = urlParams.get('workerId');
+
+        // add workerID to data
+        jsPsych.data.addProperties({
+            workerID: workerID
+        });
+
+        // create and initialize timeline
+        var timeline = [];
+
+        /* init connection with pavlovia.org */
+        var pavlovia_init = {
+            type: "pavlovia",
+            command: "init"
+        };
+
+
+    </script>
+    <title>Hello</title>
+
+</head>
+
+<body>
+<iframe id="iframe-target" src="https://crowdcognition.net/i-Sight/"></iframe>
+<div id="jspsych-target"></div>
+<script>
+
+
+    // create and initialize timeline
+    var timeline = [];
+
+    /* init connection with pavlovia.org */
+    var pavlovia_init = {
+        type: "pavlovia",
+        command: "init"
+    };
+
+
+    const debriefing_text = `
+  <h2>Title of Study: [Responsibilty and Confidence]</h2>
+  <p><strong>Resarcher:</strong> [Jamal Esmaily]<br>
+  <strong>Affiliation:</strong> [LMU Munich]</p>
+
+  Thank you for participating in our online experiment. We appreciate your time and effort. The purpose of this debriefing is to provide you with more information about the study, its objectives, and the significance of your contribution.
+  <p><strong>Purpose of this Study:</strong></p>
+  The primary goal of this study was to investigate the effect of varying levels of responsibility on confidence. We aim to understand the underlying factors and mechanisms that influence confidence to contribute to the scientific understanding of this area. Your participation helps us gather data to test our hypotheses and draw meaningful conclusions.
+
+  <p><strong>Hypothesis and Methods:</strong></p>
+   In this study, we hypothesized that higher responsibility would lead to more confident decisions and longer reaction times. To test these hypotheses, we presented you an invented start-up in the beginning of the experiment. Since you were assigned to the low responsibility condition, we told you that your performance would not matter.
+   Your performance on these tasks, along with that of other participants, will be analyzed to determine whether our hypotheses are supported or refuted.
+
+  <p><strong>Confidentiality:</strong></p>
+  Please be assured that your responses will be kept strictly confidential. All data will be stored securely and accessible only by the research team. Any information that may identify you will be removed or altered before findings are reported, and results will be presented in aggregate form to ensure your anonymity.
+  
+  <p><strong>Publication:</strong></p>
+  The results of this study may be published in scientific journals, presented at conferences, or used for educational purposes. However, your anonymity will always be protected, and no personal identifying information will be disclosed in any publications or presentations.
+  
+  <p>Thank you once again for your participation in our study. Your contribution is essential to advancing our understanding of confidence in decision making and its potential applications.</p>
+
+  <p><em>Press any key to continue.</em></p>
+`;
+
+    const consent_text = `
+<div id="consent-form" style="width:600px;font-size:16px;margin-top:30px;text-align:left">
+<p>Thank you for choosing our experiment! The HIT you are about to do is a study by researchers at Ludwig Maximilian University of Munich.  
+  In this study, you are invited to take part in a visual experiment and report your decision.</p>
+<p>Please do not take this HIT on a mobile device (e.g., cellphone or tablet).</p>
+<p>If you have any questions or concerns about this HIT please contact Jamal Esmaily (<a href="mailto:jamal.esmaily@campus.lmu.de?subject=Participation in Resp Task">jamal.esmaily@campus.lmu.de</a>).</p>
+<p>You are free to decide whether you would like to participate or not. 
+  If you decide you want to participate, click the button below marked "I consent to take part in this study". 
+  Even if you consent to begin the study, you are free to change your mind at any time: 
+    withdrawing consent simply means you decide you don't want to answer these questions and/or you don't want us to use your data. 
+  In that case, simply close the survey window and return the HIT.
+  Deciding not to participate, or withdrawing consent once you've begun, does not involve any penalty. 
+</p>
+<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Jamal Esmaily (<a href="mailto:jamal.esmaily@campus.lmu.de?subject=Resp Task">jamal.esmaily@campus.lmu.de</a>) with your request.
+  You do not need to give a reason for the request.</p>
+<p>By clicking below, you consent to participate in this task.
+   If you do not wish to continue, please simply close this window and return the HIT.</p>
+
+</div>
+`;
+    ////////////////////////////////////////////////////////////
+    /* The stimuli for the experiment are chessboard images with varying degrees of noise. 
+       First we need to load them into jsPsych in 5 image pool according to 5 different levels of difficulty. 
+       
+        LEVEL 1 = 70 / 30 
+        LEVEL 2 = 60 / 40 
+        LEVEL 3 = 58 / 42
+        LEVEL 4 = 55 / 45 
+        LEVEL 5 = 52 / 48 
+        
+      
+    */
+    ////////////////////////////////////////////////////////////
+
+
+    var confidence_scale = ['img/con_scale.png'];
+
+    var image_pool_level_1 = ['img/catch_b1.png', 'img/1b1.png', 'img/1b2.png', 'img/1b3.png', 'img/1b4.png', 'img/1b5.png', 'img/1b6.png', 'img/1b7.png',
+        'img/1w1.png', 'img/1w2.png', 'img/1w3.png', 'img/1w4.png', 'img/1w5.png', 'img/1w6.png', 'img/1w7.png', 'img/catch_w1.png']
+
+    var image_pool_level_2 = ['img/2b1.png', 'img/2b2.png', 'img/2b3.png', 'img/2b4.png', 'img/2b5.png', 'img/2b6.png', 'img/2b7.png',
+        'img/2w1.png', 'img/2w2.png', 'img/2w3.png', 'img/2w4.png', 'img/2w5.png', 'img/2w6.png', 'img/2w7.png']
+
+    var image_pool_level_3 = ['img/3b1.png', 'img/3b2.png', 'img/3b3.png', 'img/3b4.png', 'img/3b5.png', 'img/3b6.png', 'img/3b7.png',
+        'img/3w1.png', 'img/3w2.png', 'img/3w3.png', 'img/3w4.png', 'img/3w5.png', 'img/3w6.png', 'img/3w7.png']
+
+    var image_pool_level_4 = ['img/4b1.png', 'img/4b2.png', 'img/4b3.png', 'img/4b4.png', 'img/4b5.png', 'img/4b6.png', 'img/4b7.png',
+        'img/4w1.png', 'img/4w2.png', 'img/4w3.png', 'img/4w4.png', 'img/4w5.png', 'img/4w6.png', 'img/4w7.png']
+
+    var image_pool_level_5 = ['img/5b1.png', 'img/5b2.png', 'img/5b3.png', 'img/5b4.png', 'img/5b5.png', 'img/5b6.png', 'img/5b7.png',
+        'img/5w1.png', 'img/5w2.png', 'img/5w3.png', 'img/5w4.png', 'img/5w5.png', 'img/5w6.png', 'img/5w7.png']
+
+
+    // Now add the image_pools together into one array. The order of that array will be randomized in var test procedure
+
+    var image_pool_mixed = image_pool_level_1.concat(image_pool_level_2, image_pool_level_3, image_pool_level_4, image_pool_level_5)
+
+
+    // Define the variables that indicate if a stimulus has been classified correctly. k = pass , l = white, j = balck.
+
+
+    var cor_stim = ['j', 'j', 'j', 'j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l', 'l', 'l', 'l']
+
+    var conds = [
+        'CatchB1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'Lev1', 'CatchW1',
+        'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2', 'Lev2',
+        'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3', 'Lev3',
+        'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4', 'Lev4',
+        'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5', 'Lev5']
+
+
+    // Do the same procedure for the practice routine. (1) Define a practicepool (2) Define the classifications. 
+    // PB = Practice Black  
+    // PW = Practice White 
+
+    var practicepool_1 = ['img/pcatchb.png', 'img/P1b1.png', 'img/P1b2.png', 'img/P1b3.png', 'img/P1b4.png',
+        'img/P1w1.png', 'img/P1w2.png', 'img/P1w3.png', 'img/P1w4.png']
+
+    var practicepool_2 = ['img/P2b1.png', 'img/P2b2.png', 'img/P2b3.png', 'img/P2b4.png',
+        'img/P2w1.png', 'img/P2w2.png', 'img/P2w3.png', 'img/P2w4.png']
+
+    var practicepool_3 = ['img/P3b1.png', 'img/P3b2.png', 'img/P3b3.png', 'img/P3b4.png',
+        'img/P3w1.png', 'img/P3w2.png', 'img/P3w3.png', 'img/P3w4.png']
+
+    var practicepool_4 = ['img/P4b1.png', 'img/P4b2.png', 'img/P4b3.png', 'img/P4b4.png',
+        'img/P4w1.png', 'img/P4w2.png', 'img/P4w3.png', 'img/P4w4.png']
+
+    var practicepool_5 = ['img/P5b1.png', 'img/P5b2.png', 'img/P5b3.png', 'img/P5b4.png',
+        'img/P5w1.png', 'img/P5w2.png', 'img/P5w3.png', 'img/P5w4.png']
+
+
+    var practice_pool_mixed = practicepool_1.concat(practicepool_2, practicepool_3, practicepool_4, practicepool_5)
+
+
+    var cor_stim_practice = ['j', 'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l',
+        'j', 'j', 'j', 'j', 'l', 'l', 'l', 'l']
+
+
+    var conds_practice = ['Catch_Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice',
+        'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice',
+        'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice',
+        'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice',
+        'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice', 'Practice']
+
+
+    jsPsych.pluginAPI.preloadImages(image_pool_mixed);
+    jsPsych.pluginAPI.preloadImages(image_pool_mixed);
+    jsPsych.pluginAPI.preloadImages(image_pool_mixed);
+
+    jsPsych.pluginAPI.preloadImages(practice_pool_mixed);
+    jsPsych.pluginAPI.preloadImages(practice_pool_mixed);
+    jsPsych.pluginAPI.preloadImages(practice_pool_mixed);
+
+
+    //  jsPsych.pluginAPI.preloadImages(image_pool_mixed, function() {
+    //   // start the experiment here
+    // });
+
+
+    //  jsPsych.pluginAPI.preloadImages(practice_pool_mixed, function() {
+    //   // start the experiment here
+    // });
+
+
+    ////////////////////////////////////////////////////////////
+    /* 1. Define Welcome Screen */
+    ////////////////////////////////////////////////////////////
+
+    var welcome = {
+        type: "html-keyboard-response",
+        stimulus: ["<p>Welcome to the experiment and thank you for helping us by participating in this experiment<br/><p> Before we start, please answer a few questions about yourself.<br/><p>Press any key to continue"
+        ],
+    };
+
+    var InitInstruction = {
+        type: "html-keyboard-response",
+        stimulus: ["This experiment consists of two parts. In each part, you will need to go through a simple visual decision-making task",
+            "You will receive the corresponding instructions for each part",
+            "The experiment will take no more than 20 minutes. Please complete the experiment in one continuous session"
+        ]
+    };
+
+    var start_iframe = {
+        type: 'call-function',
+        func: function () {
+            document.querySelector('#iframe-target').style.display = 'block';
+            document.querySelector('#jspsych-target').style.width = '48vw';
+        }
+    }
+
+    const demographics = {
+        type: 'trial',
+        timeline: [
+            {
+                type: 'survey-multi-choice',
+                questions: [
+                    {
+                        prompt: 'What is your gender?',
+                        options: ['Man', 'Woman', 'Non-binary', 'Prefer not to say'],
+                        required: true
+                    },
+                    {
+                        prompt: 'What is your highest completed education level?',
+                        options: [
+                            'No schooling completed',
+                            'Primary education (age: 5–10)',
+                            'Secondary education (age: 11–17)',
+                            'University undergraduate degree/professional equivalent',
+                            'Postgraduate degree',
+                            'Prefer not to say'
+                        ],
+                        required: true
+                    }
+                ]
+            },
+            {
+                type: 'survey-text',
+                questions: [
+                    {
+                        prompt: 'What is your age?',
+                        required: true
+                    }
+                ]
+            }
+        ]
+    };
+
+    var feedbackTrial = {
+        type: 'survey-text',
+        questions: [
+            {
+                prompt: 'Do you have any feedback for this experiment? If not, please leave blank ',
+                rows: 6,
+                columns: 40,
+                required: false,
+            },
+        ],
+        on_finish: function (data) {
+            const feedbackResponse = JSON.parse(data.responses);
+            console.log('Feedback:', feedbackResponse.Q0);
+        },
+    };
+
+
+    ////////////////////////////////////////////////////////////
+    /* 2. Exp. Manipulation */
+    ////////////////////////////////////////////////////////////
+
+    var resp_manipulation = {
+        type: "instructions",
+        pages: ["<p><b><font size='10'>PART 2</font></b> <br/><br/><br/> please read the follwing text carefully!",
+            "We are collaborating with i-Sight (see website on the left), a company that produces smart glasses for visually impaired people.",
+            "i-Sight's smart glasses translate visual information into speech. At the moment, they help visually impaired people with reading and even face recognition. <p> i-Sight is now trying to launch a new feature that may help blind people with spatial navigation. For this, it requires funding from the Assistive Technology Fund (ATF) for which very strict criteria need to be fulfilled.",
+            "i-Sight's current prototype - i-Sight discovery - performed very badly on visual discrimination task (similar to what you have seen already) and hence failed to receive funding from the ATF. This is why i-Sight launched a collaboration with us (LMU Munich) to improve its current prototype using human perceptual data. Your results on the following task are collected for research purposes only.",
+            "What we ask from you: Your performance will be recorded as part of the study. It has no direct impact for the development of the prototype. Unfortunately, we haven't yet reached the sufficient number of participants for the pilot study. We hope you will complete it."],
+        show_clickable_nav: true
+    };
+
+    var stop_iframe = {
+        type: 'call-function',
+        func: function () {
+            document.querySelector('#iframe-target').style.display = 'none';
+            document.querySelector('#jspsych-target').style.width = '100vw';
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////
+    // 3. Questionnaire 
+    ////////////////////////////////////////////////////////////
+
+
+    var intro_question = {
+        type: "html-keyboard-response",
+        stimulus: "Thanks for completing the experiment. Please now take some time to fill out the subsequent survey (Estimated time: 2min). <p> Press any key to continue."
+    };
+
+
+    var question1 = {
+        type: "survey-multi-choice",
+        preamble: '<p> The following statements refer to thoughts and behaviors which may occur to everyone in everyday life.  <p> For each statement, Choose the reply which best seems to fit you and the degree of disturbance <p> which such thoughts or behaviors may create.',
+        questions: [
+
+            {
+                prompt: "I try to put off making decisions.",
+                name: '1',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I always know exactly what I want.",
+                name: '2',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I find it easy to make decisions.",
+                name: '3',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I have a hard time planning my free time.",
+                name: '4',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I like to be in a position to make decisions.",
+                name: '5',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "Once I make a decision, I feel fairly confident that it is good one.",
+                name: '6',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "When ordering form a menu, I usually find it difficult to decide what to eat.",
+                name: '7',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I usually make decisions quickly.",
+                name: '8',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            }
+        ],
+    };
+
+    var question2 = {
+        type: "survey-multi-choice",
+        questions: [
+
+            {
+                prompt: "Once I make a decision, I stop worrying about it.",
+                name: '9',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I become anxious when making a decision.",
+                name: '10',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I often worry about making a wrong decision.",
+                name: '11',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "After I have chosen or decided something, I often believe I've made the wrong choice or decision.",
+                name: '12',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I do not get assignments done on time because I cannot decide what to do first.",
+                name: '13',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "I have trouble completing assignments because I can't prioritize what is most important.",
+                name: '14',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            },
+            {
+                prompt: "It seems that deciding on the most trivial thing takes me a long time",
+                name: '15',
+                options: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'],
+                required: true
+            }
+        ],
+    };
+
+    var question_routine = {
+        timeline: [intro_question, question1, question2]
+    };
+
+
+    ////////////////////////////////////////////////////////////
+    /* 4. Task Instructions */
+    ////////////////////////////////////////////////////////////
+
+
+    var instructions = {
+        type: "instructions",
+        pages: ["<p style=text-align:left;> After you press the <u>spacebar</u>, you will briefly see a square grid of black and white squares like this<br/><br/> <div style='float: center;'><img src='img/Instruct.png'></img> <br/><br/> <p style=text-align:left;>After it disappears, a cross appears that you should fixate your gaze on, and you should quickly judge if there were more black or more white squares in the grid<br/><br/><br/><br/></p>",
+            "<p style=text-align:left;>If you are <u><b><font size='4'>Sure</font></b></u> about your decision you could report your decision. Please try to be as fast and as accurate as you can! </br> </br>For indicating <b><font size='6'>BLACK</font></b> press <b><font size='6'>J</font></b> and for <b><font size='6'>WHITE</font></b> press <b><font size='6'>L</font></b> <br/> <br/> If you are <u><b><font size='4'>Not Sure</font></b></u> about your decision you can <b><font size='6'>PASS ON</font></b> the trial by pressig <b><font size='6'>K</font></b> <br/><br/> <p> </p>",
+            "<p> With every mistake, you lose <b><font size='6', color='red'>Three</font></b> bonus point. <br/><br/> With every correct decision, you win <b><font size='6', color='green'>One</font></b> point. </br></br> If you <b><font size='6', color='yellow'>PASS</font></b>, you do not win or lose anything. </br></br> </p>",
+            "<p> You see your collective reward in different points of the experiment. </br></br> <u><b>Remember: Your final payment is impacted by your collective points. </u></b></p>",
+            "First let's  do some practice trials."],
+        show_clickable_nav: true
+    };
+
+
+    var consent = {
+        type: "instructions",
+        pages: [consent_text],
+        button_label_next: 'I consent to take part in this study',
+        show_clickable_nav: true,
+        allow_backward: false
+    };
+
+
+    ////////////////////////////////////////////////////////////
+    /* 5. Defining the practice routine. */
+    ////////////////////////////////////////////////////////////
+
+    /*
+
+    1. Fixation 
+    2. Stimuli 
+    3. Responsescreen
+    4. Confidence Rating 
+    5. Feedback
+    
+    */
+
+
+    // Fixation
+    var fixation_timing = null;
+    var fixation = {
+        type: "html-keyboard-response",
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: "NO_KEYS",
+        trial_duration: function () {
+            fixation_timing = jsPsych.randomization.sampleWithReplacement([500, 750, 1000, 1250, 1500], 1);
+            return fixation_timing;
+        },
+        data: {
+            task: 'fixation'
+        },
+        on_finish: function (data) {
+            data.trial_duration = fixation_timing;
+        }
+    };
+
+
+    // Init Trails
+    var Initstims = ['img/Initb4.png', 'img/Initw1.png', 'img/Initw3.png', 'img/Initw5.png']
+    var cor_stim_init = ['j', 'l', 'l', 'l']
+    var opt_char = ['k']
+    var conds_init = ['Init', 'Init', 'Init', 'Init']
+    jsPsych.pluginAPI.preloadImages(Initstims);
+
+
+    var Init_trials = [];
+    for (var i = 0; i < Initstims.length; i++) {
+        Init_trials.push({
+            stimulus: Initstims[i],
+            correct_response: cor_stim_init[i],
+            condition: conds_init[i],
+            opt: opt_char[0]
+        })
+    }
+
+    var test_Init = {
+        type: "image-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: "NO_KEYS",
+        trial_duration: 400
+    };
+
+
+    // Responsescreen 
+    var responsescreen = {
+        type: "html-keyboard-response",
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: ['k', 'l', 'j'],
+        data: {
+            task: 'stim',
+            correct_response: jsPsych.timelineVariable('correct_response'),
+            stimcond: jsPsych.timelineVariable('condition'),
+            optresp: jsPsych.timelineVariable('opt'),
+        },
+        on_finish: function (data) {
+            data.correct = jsPsych.pluginAPI.compareKeys(data.key_press, data.correct_response);
+            data.opt = jsPsych.pluginAPI.compareKeys(data.key_press, data.optresp);
+            data.reward = sumCorrect - SumWrong;
+            // data.reward = (data.correct === "TRUE" ? 1 : -1)
+        }
+    };
+
+
+    // Confidence
+    // var confidence = {
+    //   type: "image-keyboard-response",
+    //   stimulus: confidence_scale,
+    //  // stimulus_height: 200,
+    //  // stimulus_width: 1100, 
+    //   choices: ['1', '2', '3', '4', '5', '6'],
+    //   // choices: ['a', 's'],
+    //   };
+
+
+    // Feedback 
+
+    var SumWrong = 0;
+    var sumCorrect = 0;
+    var sumOpt = 0;
+    var total_reward = 0;
+
+    var feedback = {
+        type: "html-keyboard-response",
+        choices: "NO_KEYS",
+        trial_duration: 1000,
+        stimulus: function () {
+            // This function will check the accuracy of the last response and use that information to set
+            // the stimulus value on each trial.
+            var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+            var ifopt = jsPsych.data.get().last(1).values()[0].opt;
+
+            if (last_trial_correct) {
+                sumCorrect++;
+                total_reward = sumCorrect - SumWrong;
+                return '<p style="font-size:40px;font-weight: bold;color:green;">Correct</p>'
+                //return "<Color><strong><p>Correct</p></strong><Color>"; // the parameter value has to be returned from the function
+            } else if (!last_trial_correct && !ifopt) {
+                SumWrong = SumWrong + 3;
+                total_reward = sumCorrect - SumWrong;
+
+                return '<p style="font-size:40px;font-weight: bold;color:Red;">Wrong</p>'
+                //return "<Color><strong><p>Correct</p></strong><Color>"; // the parameter value has to be returned from the function
+            } else if (ifopt) {
+                sumOpt++;
+                total_reward = sumCorrect - SumWrong;
+
+                return '<p style="font-size:40px;font-weight: bold;color:Yellow;">Pass</p>'
+            }
+        }
+
+    };
+
+
+    // --> Define practice procedure
+    var Init_procedure = {
+        timeline: [fixation, test_Init, responsescreen, feedback],
+        timeline_variables: Init_trials,
+        sample: {
+            type: 'without-replacement',
+            size: practice_pool_mixed.length
+        },
+        repetitions: 1
+    };
+
+    ////////////////////////////////////////////////////////////
+    /* 6. Break Conditional. End of Practice Trials. */
+    ////////////////////////////////////////////////////////////
+
+    var break_trial_Init = {
+        type: "html-keyboard-response",
+        stimulus: function () {
+            // document.getElementById('rewardPoints').textContent = total_reward;
+            // <span id="rewardPoints"></span>
+            return '<p> Very well done! <br/> Practice is finished. your collected reward is: <span style="font-weight: bold; font-size: 50px;">' + total_reward + '</span> Points! <br/><br/> Now we enter the main experiment. <br/><br/> This experiment has two parts. At the beginning of each part, you will receive the corresponding instruction for that part.<br/>  Press any key to continue';
+        },
+        // stimulus:  "<p> Very well done! <br/> Practice is finished. Now we enter the main experiment. <br/><br/> This experiment has two parts. At the beginning of each part, you will receive the corresponding instruction for that part.<br/>  Press any key to continue",
+    };
+
+    var part1_instruct = {
+        type: "html-keyboard-response",
+        stimulus: "<p><b><font size='10'>PART 1</font></b> <br/><br/><br/> Here you will do several trials of the Black/White task that you just practiced.<br/><br/>   <p> As a reminder: For <b><font size='6'>BLACK</font></b> press  <b><font size='6'>J</font></b>, for <b><font size='6'>WHITE</font></b> press  <b><font size='6'>L</font></b> and for <b><font size='6'>PASS ON</font></b> a trial press <b><font size='6'>K</font></b>  <br/><br/> With every mistake, you lose <b><font size='6', color='red'>Three</font></b> bonus point. <br/><br/> With every correct decision, you win <b><font size='6', color='green'>One</font></b> point. </br></br> If you <b><font size='6', color='yellow'>PASS</font></b>, you do not win or lose anything. </br></br> <u><b>Remember: Your final payment is imapcted by your collective points.</u></b> </br></br>Press c to continue",
+        choices: 'c'
+    };
+
+
+    // Stimuli
+    var practice_trials = [];
+    for (var i = 0; i < practice_pool_mixed.length; i++) {
+        practice_trials.push({
+            stimulus: practice_pool_mixed[i],
+            correct_response: cor_stim_practice[i],
+            condition: conds_practice[i],
+            opt: opt_char[0]
+
+        })
+    }
+
+    var test_practice = {
+        type: "image-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: 'NO_KEYS',
+        trial_duration: 400,
+    };
+
+
+    // Responsescreen 
+    // var responsescreen = {
+    //   type: "html-keyboard-response",
+    //   stimulus: '<div style="font-size:60px;">+</div>',
+    //   choices: ['k', 'l'],
+    //   data: {
+    //     task: 'stim',
+    //     correct_response: jsPsych.timelineVariable('correct_response'),
+    //     stimcond: jsPsych.timelineVariable('condition'),
+    //   },
+    //   on_finish: function (data) {
+    //         data.correct = jsPsych.pluginAPI.compareKeys(data.key_press, data.correct_response);
+    //   }
+    // };
+
+
+    // Confidence
+    // var confidence = {
+    //   type: "image-keyboard-response",
+    //   stimulus: confidence_scale,
+    //  // stimulus_height: 200,
+    //  // stimulus_width: 1100, 
+    //   choices: ['1', '2', '3', '4', '5', '6'],
+    //   // choices: ['a', 's'],
+    //   };
+
+
+    // Feedback 
+    // var feedback = {
+    //     type: "html-keyboard-response",
+    //     choices: "NO_KEYS",
+    //     trial_duration: 1000,
+    //     stimulus: function(){
+    //       // This function will check the accuracy of the last response and use that information to set
+    //       // the stimulus value on each trial.
+    //       var last_trial_correct = jsPsych.data.get().last(2).values()[0].correct;
+    //       if(last_trial_correct){
+    //         return '<p style="font-size:40px;font-weight: bold;color:green;">Correct</p>'
+    //         return "<Color><strong><p>Correct</p></strong><Color>"; // the parameter value has to be returned from the function
+    //       } else {
+    //         return '<p style="font-size:40px;font-weight: bold;color:Red;">Wrong</p>'          }
+    //     }
+    // };
+
+
+    var break1_pcount = 0;
+    var break2_pcount = 0;
+
+    var break_p1 = {
+        type: "html-keyboard-response",
+        stimulus: function () {
+
+            // var sumCorrect = 0;
+            // for (var i = 0; i < 5; i++) {
+
+            //   var last_trial_correct = jsPsych.data.get().last(i).values()[0].correct;
+            //   var ifopt = jsPsych.data.get().last(i).values()[0].opt;
+            //   if (lastTrials.length > 0) {
+            //       console.log("Trial " + i + ": correct = " + last_trial_correct + ": opt = " + ifopt);
+            //       if (lastTrials[0].correct === true) {
+            //           sumCorrect++;
+            //       }
+            //       } else {
+            //       console.log("No data for trial " + i);
+            //       }
+
+
+            // return '<p>The collective reward so far is: ' + total_reward + ' Points! <br/><br/> when you’re ready, press c to continue</p> ';
+            return '<p>The collective reward so far is: <span style="font-weight: bold; font-size: 50px;">' + total_reward + '</span> Points! <br/><br/> when you’re ready, press c to continue</p> ';
+            // return '<p>num correct: ' + sumCorrect + '<br/> num wrong: ' + SumWrong + '<br/>num opt: ' + sumOpt + '<br/></p> ';
+
+
+        },
+        choices: "c"
+    };
+
+    // var break_p1 = {
+    // type: "html-keyboard-response",
+    // stimulus:  'when you’re ready, press c to continue',
+    // choices: "c"
+    // };
+
+
+    var attention_checkp = {
+        type: "survey-multi-choice",
+        questions: [
+            {
+                prompt: "Which word has more letters: white or gray",
+                name: '21',
+                options: ['white', 'gray'],
+                required: true
+            }
+        ]
+    }
+
+
+    var p_break1 = {
+        timeline: [break_p1],
+        conditional_function: function () {
+            // increment trial count - in first run through the timeline variables procedure, trial_count will be equal to 1
+            // --> hence (n-practice trials) + 1
+            break1_pcount++;
+            if (break1_pcount == 20) {
+                return true;
+            } else {
+                // otherwise skip the break trial
+                return false;
+            }
+        }
+    };
+
+    var p_break2 = {
+        timeline: [attention_checkp],
+        conditional_function: function () {
+            // increment trial count - in first run through the timeline variables procedure, trial_count will be equal to 1
+            // --> hence (n-practice trials) + 1
+            break2_pcount++;
+            if (break2_pcount == 30) {
+                return true;
+            } else {
+                // otherwise skip the break trial
+                return false;
+            }
+        }
+    };
+
+
+    // --> Define practice procedure
+    var practice_procedure = {
+        timeline: [p_break1, p_break2, fixation, test_practice, responsescreen, feedback],
+        timeline_variables: practice_trials,
+        sample: {
+            type: 'without-replacement',
+            size: practice_pool_mixed.length
+        },
+        repetitions: 1
+    };
+
+    ////////////////////////////////////////////////////////////
+    /* 6. Break Conditional. End of Practice Trials. */
+    ////////////////////////////////////////////////////////////
+
+    var break_trial_Practice = {
+        type: "html-keyboard-response",
+        stimulus: function () {
+            return 'End of The Part 1. Your collective reward so far is: <span style="font-weight: bold; font-size: 50px;">' + total_reward + '</span> Points! </br></br> Now we will start Part 2. <p> As a reminder: For <strong style="font-size:24px">BLACK</strong> press  <strong style="font-size:24px">J</strong>, for <strong style="font-size:24px">WHITE</strong> press  <strong style="font-size:24px">L</strong> and for <strong style="font-size:24px">PASS ON</strong> a trial press <strong style="font-size:24px">K</strong> <br/><br/> With every mistake, you lose <strong style="color: red; font-size:24px">Three</strong> bonus point. <br/><br/> With every correct decision, you win <strong style="color: green; font-size:24px">One</strong> point. </br></br> If you <strong style="color: yellow; font-size:24px">PASS</strong>, you do not win or lose anything. </br></br> <u><b>Remember: Your final payment is imapcted by your collective points. </u></b><p> Press c to continue';
+        },
+        // stimulus:  'End of The Part 1. Your collective reward so far is: ' + total_reward + ' Points! </br></br> Now we will start Part 2. <p> As a reminder: For <strong style="font-size:24px">BLACK</strong> press  <strong style="font-size:24px">J</strong>, for <strong style="font-size:24px">WHITE</strong> press  <strong style="font-size:24px">L</strong> and for <strong style="font-size:24px">PASS ON</strong> a trial press <strong style="font-size:24px">K</strong> <br/><br/> With every mistake, you lose one bonus point. <br/><br/> With every correct decision, you win one point. </br></br> If you <u>PASS</u>, you do not win or lose anything. </br></br> <u><b>Remember: Your final payment is imapcted by your collective points. </u></b><p> Press c to continue',
+        choices: 'c'
+    };
+
+
+    ////////////////////////////////////////////////////////////
+    /* 7. Defining test routine */
+    ////////////////////////////////////////////////////////////
+
+
+    /*
+
+    1. Fixation (The fixation variable has already been defined in the practice routine)
+    2. Stimuli 
+    3. Responsescreen
+    4. Confidence Rating 
+    5. Feedback (The feedback variable has already been defined in the practice routine)
+    
+    */
+
+    // Stimuli 
+
+    var trials = [];
+    for (var i = 0; i < image_pool_mixed.length; i++) {
+        trials.push({
+            stimulus: image_pool_mixed[i],
+            correct_response: cor_stim[i],
+            condition: conds[i],
+            opt: opt_char[0]
+
+        })
+        ;
+    }
+
+    var test = {
+        type: "image-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: "NO_KEYS",
+        trial_duration: 400,
+    };
+
+
+    // Responsescreen
+    // var responsescreen = {
+    //   type: "html-keyboard-response",
+    //   stimulus: '<div style="font-size:60px;">+</div>',
+    //   choices: ['k', 'l'],
+    //   data: {
+    //     task: 'stim',
+    //     correct_response: jsPsych.timelineVariable('correct_response'),
+    //     stimcond: jsPsych.timelineVariable('condition'),
+    //   },
+    //   on_finish: function(data){
+    //     data.correct = jsPsych.pluginAPI.compareKeys(data.key_press, data.correct_response);
+    //   }
+    // };
+
+
+    // Confidence
+    // var confidence = {
+    //   type: "image-keyboard-response",
+    //   stimulus: confidence_scale,
+    //   stimulus_height: 600,
+    //   stimulus_width: 1100, 
+    //   choices: ['1', '2', '3', '4', '5', '6'],
+    //   // choices: ['a', 's'],
+    //   };
+
+    // Initialise Trial Count
+    // var trial_count = 0
+
+    // Set a break screen after half of the trials.
+    // Set a break screen after half of the trials.
+    var break1_count = 0;
+    var break2_count = 0;
+    var break3_count = 0;
+
+    var break_trial1 = {
+        type: "html-keyboard-response",
+        stimulus: function () {
+            return '<p>The collective reward so far is: <span style="font-weight: bold; font-size: 50px;">' + total_reward + '</span> Points! <br/><br/> when you’re ready, press c to continue</p> ';
+        },
+        choices: "c"
+    };
+
+
+    // var break_trial1 = {
+    // type: "html-keyboard-response",
+    // stimulus:  'when you’re ready, press c to continue<br/><br/> your collective reward is:',
+    // choices: "c"
+    // };
+
+
+    var attention_check1 = {
+        type: "survey-multi-choice",
+        questions: [
+            {
+                prompt: "Which word has more letters: squares or black",
+                name: '21',
+                options: ['squares', 'black'],
+                required: true
+            }
+        ]
+    }
+
+    var attention_check2 = {
+        type: "survey-multi-choice",
+        questions: [
+            {
+                prompt: "Which word has more letters: squares or white",
+                name: '21',
+                options: ['squares', 'white'],
+                required: true
+            }
+        ]
+    }
+
+
+    var break1 = {
+        timeline: [break_trial1],
+        conditional_function: function () {
+            // increment trial count - in first run through the timeline variables procedure, trial_count will be equal to 1
+            // --> hence (n-practice trials) + 1
+            break2_count++;
+            if (break2_count == 35) {
+                return true;
+            } else {
+                // otherwise skip the break trial
+                return false;
+            }
+        }
+    };
+
+    var break2 = {
+        timeline: [attention_check1],
+        conditional_function: function () {
+            // increment trial count - in first run through the timeline variables procedure, trial_count will be equal to 1
+            // --> hence (n-practice trials) + 1
+            break1_count++;
+            if (break1_count == 20) {
+                return true;
+            } else {
+                // otherwise skip the break trial
+                return false;
+            }
+        }
+    };
+
+    var break3 = {
+        timeline: [attention_check2],
+        conditional_function: function () {
+            // increment trial count - in first run through the timeline variables procedure, trial_count will be equal to 1
+            // --> hence (n-practice trials) + 1
+            break3_count++;
+            if (break3_count == 50) {
+                return true;
+            } else {
+                // otherwise skip the break trial
+                return false;
+            }
+        }
+    };
+
+
+    // --> Define test procedure 
+    var test_procedure = {
+        timeline: [break1, break2, break3, fixation, test, responsescreen, feedback],
+        timeline_variables: trials,
+        // randomize_order: true, --> another randomization function, however with the possibility of seeing the same stimulus several times.
+        // Instead, sample the number of stimuli (image_pool_mixed.length) from the timeline variable, with each
+        // item being selected a maximum of 1 time (without-replacement)
+        sample: {
+            type: 'without-replacement',
+            size: image_pool_mixed.length
+        },
+        repetitions: 1
+    };
+
+
+    var resp_est = {
+        type: "survey-multi-choice",
+        preamble: "Please answer the following questions.",
+        questions: [
+
+            {
+                prompt: "How responsible did you feel for the development of i-sight's new device?",
+                name: 'Resp_est',
+                options: ['Not at All', 'A Little', 'Quite a Lot', 'A Lot', 'Very Much'],
+                required: true
+            },
+
+            {
+                prompt: "How afraid were you of making mistakes?",
+                name: 'Err_est',
+                options: ['Not at All', 'A Little', 'Quite a Lot', 'A Lot', 'Very Much'],
+                required: true
+            },
+
+            {
+                prompt: "Did you think that your performance would impact the development of isight's new device?",
+                name: 'Err_est',
+                options: ['Not at All', 'A Little', 'Quite a Lot', 'A Lot', 'Very Much'],
+                required: true
+            }
+        ]
+    }
+
+
+    ////////////////////////////////////////////////////////////
+    /* 8. Define end of trials. */
+    ////////////////////////////////////////////////////////////
+
+    var end_trial = {
+        type: "html-keyboard-response",
+        stimulus: function () {
+            return '<p>Thanks for completing the task! </br></br> Your collective reward is: <span style="font-weight: bold; font-size: 50px;">' + total_reward + '</span> Points! <br/><br/> We will take your points into account, calculate your final payment and pay you soon. <br/><br/> when you’re ready, press any key to continue</p> ';
+        },
+        // stimulus:  '<p>Thanks for completing the task! Your collective reward is: ' + total_reward + ' Points! <br/><br/> when you’re ready, press any key to continue</p> ',
+    };
+
+    /* finish connection with pavlovia.org */
+    var pavlovia_finish = {
+        type: "pavlovia",
+        command: "finish"
+    };
+
+    const debriefing_trial = {
+        type: 'html-keyboard-response',
+        stimulus: debriefing_text,
+        response_ends_trial: true,
+    };
+
+    var final_trial = {
+        type: "html-keyboard-response",
+        stimulus: "<p> Thanks for participating! This is the end of the experiment. If you need to get in touch, please email Jamal Esmaily (jimi.esmaily@gmail.com). <p> This is your COMPLETION CODE: 1eARWDBgVtzC <p> In order to complete the experiment, please COPY this code, go back to the instructions page and enter it there.",
+        choices: "NO_KEYS"
+    }
+
+
+    jsPsych.init({
+        timeline: [consent, welcome, demographics, instructions, end_trial, resp_est, question_routine, feedbackTrial, debriefing_trial, final_trial],
+        display_element: 'jspsych-target'
+    })
+
+
+</script>
+
+</body>
+
+
+</html>
