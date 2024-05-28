@@ -8,7 +8,6 @@
 
     <script type="text/javascript" src="./static/jsPsych/jspsych.js"></script>
     <link href="./static/jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"/>
-    <!--	-->
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-html-button-response.js"></script>
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
@@ -17,6 +16,19 @@
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-survey-text.js"></script>
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-instructions.js"></script>
     <script type="text/javascript" src="./static/jsPsych/plugins/jspsych-call-function.js"></script>
+
+    <script src="./static/js/lib/jquery-2.2.4.min.js"></script>
+    <script src="./static/js/lib/jquery-ui.min.js"></script>
+    <script src="./static/js/lib/bootstrap-12/bootstrap.min.js"></script>
+    <script src="./static/js/lib/underscore-min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="module" src="./src/4inarow_standalone.js"></script>
+    <script src="./static/js/4inarow_base.js"></script>
+    <script src="./static/scripts/Code/makemove.js"></script>
+
+    <link href = "./static/css/lib/bootstrap-12/bootstrap.min.css" rel = "stylesheet">
+    <link href = './static/css/stylesheet.css' rel='stylesheet'>
 
 
     <!--    <script src="https://unpkg.com/jspsych@7.3.4"></script>-->
@@ -124,12 +136,45 @@
   <p><em>Press any key to continue.</em></p>
 `;
 
+    const game_html = '<div class="overlayed"></div>\n' +
+        '\t\t<div class="popup" id="instructions">\n' +
+        '\t\t\t<h4 style="font-size:4vh;">Instructions</h4>\n' +
+        '\t\t\t<img src="" style="width:70vw;border:none"></img>\n' +
+        '\t\t\t<button id="previousbutton" type="button" class="mybutton" style="bottom:8%;left:43%;width:10%">Previous</button>\n' +
+        '\t\t\t<button id="nextbutton" type="button" class="mybutton" style="bottom:8%;left:57%;width:10%">Next</button>\n' +
+        '\t\t</div>\n' +
+        '\n' +
+        '\t\t\n' +
+        '\t\t<div class=\'container-fluid text-center\'>\n' +
+        '\t\t\t<div class="clickprompt">Please click where you want to play a piece.</div>\n' +
+        '\t\t\t<div class="row">\n' +
+        '\t\t\t\t<div class="col-xs-8 col-xs-offset-2 canvas-container">\n' +
+        '\t\t\t\t\t<div class="canvas"></div>\n' +
+        '\t\t\t\t</div>\n' +
+        '\t\t\t</div>\n' +
+        '\t\t\t<div class=\'row\'>\n' +
+        '\t\t\t\t<div class="col-xs-8 col-xs-offset-2">\n' +
+        '\t\t\t\t\t<div class="gamecount">Game</div>\n' +
+        '\t\t\t\t</div>\n' +
+        '\t\t\t</div>\n' +
+        '\t\t\t<div class=\'row\'>\n' +
+        '\t\t\t\t<div class="headertext col-xs-8 col-xs-offset-2">\n' +
+        '\t\t\t\t\t<h1>Your turn</h1>\n' +
+        '\t\t\t\t</div>\n' +
+        '\t\t\t</div>\n' +
+        '\t\t\t<div class=\'row\'>\n' +
+        '\t\t\t\t<div class="col-xs-8 col-xs-offset-2">\n' +
+        '\t\t\t\t\t<button type="button" class="mybutton" id="nextgamebutton" style="display:none">Next game</button>\n' +
+        '\t\t\t\t</div>\n' +
+        '\t\t\t</div>\n' +
+        '\t\t</div>'
+
     const consent_text = `
 <div id="consent-form" style="width:600px;font-size:16px;margin-top:30px;text-align:left">
 <p>Thank you for choosing our experiment! The HIT you are about to do is a study by researchers at Ludwig Maximilian University of Munich.  
   In this study, you are invited to take part in a visual experiment and report your decision.</p>
 <p>Please do not take this HIT on a mobile device (e.g., cellphone or tablet).</p>
-<p>If you have any questions or concerns about this HIT please contact Jamal Esmaily (<a href="mailto:jamal.esmaily@campus.lmu.de?subject=Participation in Resp Task">jamal.esmaily@campus.lmu.de</a>).</p>
+<p>If you have any questions or concerns about this HIT please contact Sina Bolouki (<a href="mailto:sina.bolouki@tum.de?subject=Participation in Resp Task">sina.bolouki@tum.de</a>).</p>
 <p>You are free to decide whether you would like to participate or not. 
   If you decide you want to participate, click the button below marked "I consent to take part in this study". 
   Even if you consent to begin the study, you are free to change your mind at any time: 
@@ -137,7 +182,7 @@
   In that case, simply close the survey window and return the HIT.
   Deciding not to participate, or withdrawing consent once you've begun, does not involve any penalty. 
 </p>
-<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Jamal Esmaily (<a href="mailto:jamal.esmaily@campus.lmu.de?subject=Resp Task">jamal.esmaily@campus.lmu.de</a>) with your request.
+<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Sina Bolouki (<a href="mailto:sina.bolouki@tum.de?subject=Resp Task">sina.bolouki@tum.de</a>) with your request.
   You do not need to give a reason for the request.</p>
 <p>By clicking below, you consent to participate in this task.
    If you do not wish to continue, please simply close this window and return the HIT.</p>
@@ -500,6 +545,12 @@
         pages: [consent_text],
         button_label_next: 'I consent to take part in this study',
         show_clickable_nav: true,
+        allow_backward: false
+    };
+
+    var game = {
+        type: "",
+        pages: [game_html],
         allow_backward: false
     };
 
@@ -1073,7 +1124,7 @@
 
 
     jsPsych.init({
-        timeline: [consent, welcome, demographics, instructions, end_trial, resp_est, question_routine, feedbackTrial, debriefing_trial, final_trial],
+        timeline: [consent, welcome, question_routine, demographics, instructions, end_trial, resp_est, feedbackTrial, debriefing_trial, final_trial],
         display_element: 'jspsych-target'
     })
 

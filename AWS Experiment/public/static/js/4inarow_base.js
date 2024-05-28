@@ -343,10 +343,10 @@ async function start_experiment(){
 	// 	credentials: "include"// *GET, POST, PUT, DELETE, etc.
 	// })
 
-	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
-		method: "GET", // *GET, POST, PUT, DELETE, etc.
-		credentials: "include", // include, *same-origin, omit
-	})
+	// const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
+	// 	method: "GET", // *GET, POST, PUT, DELETE, etc.
+	// 	credentials: "include", // include, *same-origin, omit
+	// })
 
 	// if (newResponse.status===401) {
 	// 	window.location.href = "https://gleaming-sarong-crab.cyclic.app/login"
@@ -357,8 +357,9 @@ async function start_experiment(){
 	// 	credentials: "include", // include, *same-origin, omit
 	//
 	// })
-	console.log(newResponse.headers)
-	start_game(0)
+	// console.log(newResponse.headers)
+	// start_game(0)
+	create_questionnaire(0);
 	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
 	// },"Start")
