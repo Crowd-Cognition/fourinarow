@@ -302,7 +302,8 @@ function initialize_task(_num_games,_num_practice_games,callback){
 	num_games = _num_games
 	num_practice_games = _num_practice_games
 	user_color = 0
-	instructions_text = ["You will be playing a few games called 4-in-a-row against the computer.",
+	instructions_text = ["Thank you for choosing our experiment! The HIT you are about to do is a study by researchers at Ludwig Maximilian University of Munich.  \n  In this study, you are invited to take part in a visual experiment and report your decision.</p>\n<p>Please do not take this HIT on a mobile device (e.g., cellphone or tablet).</p>\n<p>If you have any questions or concerns about this HIT please contact Sina Bolouki (<a href=\"mailto:sina.bolouki@tum.de?subject=Participation in Resp Task\">sina.bolouki@tum.de</a>).</p>\n<p>You are free to decide whether you would like to participate or not. \n  If you decide you want to participate, click the button below marked \"I consent to take part in this study\". \n  Even if you consent to begin the study, you are free to change your mind at any time: \n    withdrawing consent simply means you decide you don't want to answer these questions and/or you don't want us to use your data. \n  In that case, simply close the survey window and return the HIT.\n  Deciding not to participate, or withdrawing consent once you've begun, does not involve any penalty. \n</p>\n<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Sina Bolouki (<a href=\"mailto:sina.bolouki@tum.de?subject=Resp Task\">sina.bolouki@tum.de</a>) with your request.\n  You do not need to give a reason for the request.</p>\n<p>By clicking below, you consent to participate in this task.\n   If you do not wish to continue, please simply close this window and return the HIT.</p>"
+						,"You will be playing a few games called 4-in-a-row against the computer.",
 						 "In this game, you and the computer place black or white pieces on a game board.",
 						 "If you get 4 pieces in a row, you win!",
 						 "You can connect your 4 pieces in any direction, horizontal, vertical or diagonal.",
@@ -359,9 +360,9 @@ async function start_experiment(){
 	// })
 	// console.log(newResponse.headers)
 	// start_game(0)
-	create_questionnaire(0);
-	// show_instructions(0,instructions_text,instructions_urls,function(){
-	// 	start_game(0)
-	// },"Start")
+	// create_questionnaire(0);
+	show_instructions(0,instructions_text,instructions_urls,function(){
+		start_game(0)
+	},"Start")
 }
 
