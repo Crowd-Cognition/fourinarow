@@ -10,7 +10,7 @@
 #SBATCH --output=4inarow_%j.out
 
 dataset=fourinarow-dev
-i=${SLURM_ARRAY_TASK_ID}
+i=1
 direc=$SCRATCH/fourinarowData/${dataset}/
 codedirec=$SCRATCH/fourinarow/Model\ code
 paramfile=${direc}/params.txt

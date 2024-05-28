@@ -207,6 +207,12 @@ class node{
           return false;
       return true;
     }
+
+    int get_depth_of_pv() {
+        if (!best)
+            return 0;
+        return select()->depth - depth - 1;
+    }
 };
 
 #endif // BFS_H_INCLUDED

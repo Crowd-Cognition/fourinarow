@@ -4,8 +4,8 @@
 using namespace peak;
 
 zet heuristic::makemove_bfs(board b,bool player){
-  node game_tree(b,evaluate(b),player,1);
-  node *n=&game_tree;
+  game_tree = new node(b,evaluate(b),player,1);;
+  node *n=game_tree;
   uint64 mold,m=0x0ULL;
   int t=0,tmax=stopping_thresh;
   vector<zet> candidates;
@@ -15,17 +15,17 @@ zet heuristic::makemove_bfs(board b,bool player){
     return makerandommove(b,player);
   remove_features();
   self=player;
-  while(iterations<max_iterations && t<tmax && !game_tree.determined()){
+  while(iterations<max_iterations && t<tmax && !game_tree->determined()){
     candidates=get_pruned_moves(n->b,n->player);
     n->expand(candidates);
-    n=game_tree.select();
+    n=game_tree->select();
     mold=m;
-    m=game_tree.bestmove().zet_id;
+    m=game_tree->bestmove().zet_id;
     if(mold==m)
       t++;
     else t=0;
     iterations++;
   }
   restore_features();
-  return game_tree.bestmove();
+  return game_tree->bestmove();
 }

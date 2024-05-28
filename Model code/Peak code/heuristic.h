@@ -3,6 +3,7 @@
 //#define DEFAULT_WEIGHTS
 
 #include "board.h"
+#include "bfs.h"
 #include <random>
 #include <vector>
 #include <map>
@@ -244,6 +245,7 @@ class heuristic{
     bool self;
     int iterations;
     double tree_stats[4];
+    node* game_tree;
     vector<pattern> feature;
     vector<pattern> feature_backup;
     map<uint64,double> vtile;

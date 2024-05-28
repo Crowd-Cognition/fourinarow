@@ -56,6 +56,7 @@ class heuristic{
     void get_params_from_file(const char*,int);
     void get_params_from_sliders(double feature_drop_slider, double lapse_slider, double value_noise_slider, double search_slider, double offense_slider);
     virtual void get_params_from_array(double*);
+    virtual void get_params_from_array(const double*);
     void get_features_from_file(const char*);
     void addfeature(uint64, int );
     void addfeature(uint64, uint64, int , int );
@@ -78,6 +79,8 @@ class heuristic{
     void remove_features();
     void restore_features();
     void eliminate_noise();
+
+    virtual ~heuristic();
 };
 
 #endif // HEURISTIC_H_INCLUDED

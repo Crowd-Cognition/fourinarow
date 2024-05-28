@@ -67,6 +67,23 @@ void heuristic::get_params_from_file(const char* filename,int subject,int group)
     get_params_from_file(filename,5*subject+group-1);
 }
 
+void heuristic::get_params_from_array(const double* input){
+  stopping_thresh=input[0];
+  pruning_thresh=input[1];
+  gamma=input[2];
+  lapse_rate=input[3];
+  opp_scale=input[4];
+  exploration_constant=input[5];
+  center_weight=input[6];
+  for(unsigned int i=0;i<Nweights;i++)
+    w_act[i]=input[i+7];
+  for(unsigned int i=0;i<Nweights;i++)
+    w_pass[i]=input[i+Nweights+7];
+  for(unsigned int i=0;i<Nweights;i++)
+    delta[i]=input[i+2*Nweights+7];
+  update();
+}
+
 void heuristic::get_params_from_array(double* input){
   stopping_thresh=input[0];
   pruning_thresh=input[1];
@@ -387,4 +404,8 @@ zet heuristic::makemove_bfs(board b, uint64 m1, uint64 m2, bool player, bool sav
     restore_features();
   }
   return bestmove;
+}
+
+heuristic::~heuristic() {
+
 }

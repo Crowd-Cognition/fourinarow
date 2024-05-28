@@ -7,7 +7,7 @@ using namespace std;
 extern "C" {
 
 int makemove(int seed, char* bp, char* wp, bool player){
-  heuristic h;
+  peak::heuristic h;
   zet m;
   int wait_time;
   mt19937_64 generator;
