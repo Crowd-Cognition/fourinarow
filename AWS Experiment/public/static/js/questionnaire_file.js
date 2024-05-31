@@ -133,29 +133,41 @@ var question2 = {
 
 var questionnaires = [resp_est, question1, question2]
 
+function send_questionnaire_data() {
+
+}
+
 function create_questionnaire(id) {
+
     let body = $('.questionnaire_body')
+    $('#main_game').hide()
     console.log(questionnaires[id].questions)
     // $body.empty()
     for (var q_id in questionnaires[id].questions) {
         var question = questionnaires[id].questions[q_id];
-        console.log(question.name)
-        console.log(question.prompt)
         let text = $('<p></p>').text(question.prompt);
+        text.addClass('text-left');
         body.append(text);
         const question_name = "\"questionnaire" + id + "_" + q_id + "\""
+        var form_group = $('<div> </div>').addClass('form_group media-left');
         for (var o_id in question.options) {
-            console.log(o_id)
             var option = question.options[o_id];
-            var optionDiv = $('<div></div>').addClass('form-check')
-            var optionInput = $('<input>').addClass('form-check-input')
+            var optionDiv = $('<div></div>').addClass('form-check media-left')
+            var optionInput = $('<input>').addClass('form-check-input').css({'text-align':'left'})
                 .attr('type', 'radio').attr('name', question_name).attr('id',question_name+"_"+o_id)
             var optionLabel = $('<label></label>').addClass('form-check-label')
-                .attr('for',question_name+"_"+o_id).text(option)
+                .attr('for',question_name+"_"+o_id).text(option).css({'text-align':'left'})
             optionDiv.append(optionInput)
             optionDiv.append(optionLabel)
-            body.append(optionDiv)
+            form_group.append(optionDiv)
+            form_group.append($('<br>'))
         }
-        console.log(body);
+        body.append(form_group)
     }
+    var next_button = $('<button> </button>').addClass('mybutton').attr('type', 'button').attr('id', 'form_next')
+        .text('Submit');
+    next_button.off("click").on("click", function() {
+        send_questionnaire_data()
+    })
+    body.append(next_button)
 }

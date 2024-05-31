@@ -204,6 +204,8 @@ html {
 	padding: 10px 10px; 
 	text-decoration:none;
 	background-repeat:no-repeat;
+	white-space: nowrap;
+	text-align: center;
 }
 .mybutton:hover {
 	background-color:#aaaaaa;
