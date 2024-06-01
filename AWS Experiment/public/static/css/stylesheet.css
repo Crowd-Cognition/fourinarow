@@ -72,12 +72,18 @@ html {
 }
 
 .popup p {
-	text-align:left;
+	text-align:center;
 	margin-left:2%;
 	margin-right:2%;
 	margin-top:1.5%;
 	margin-bottom:1.5%;
 	font-size:3vh;
+}
+
+#consent_popup p {
+	font-size:2.7vh;
+	margin: 4%;
+	text-align: left;
 }
 
 .canvas-container{ padding:0%; }

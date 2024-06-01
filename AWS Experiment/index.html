@@ -32,6 +32,83 @@
 			<button id="nextbutton" type="button" class="mybutton" style="bottom:8%;left:57%;width:10%">Next</button>
 		</div>
 
+		<div class="popup" id="consent_popup">
+			<div class="container-fluid" style="height: 100%">
+				<div class="row" style="height: 100%">
+					<div class="col-6 col-lg-6" style="height: 100%">
+						<p>Thank you for choosing our experiment! The HIT you are about to do is a study by researchers at Ludwig Maximilian University of Munich. In this study, you will play a board game against the computer.</p>
+						<p>Please do not take this HIT on a mobile device (e.g., cellphone or tablet).</p>
+						<p>If you have any questions or concerns about this HIT please contact Sina Bolouki (<a href="mailto:sina.bolouki@tum.de?subject=Participation in 4-in-a-row">sina.bolouki@tum.de</a>).</p>
+						<p>You are free to decide whether you would like to participate or not. If you decide you want to participate, click the button on the right marked "Continue". Even if you consent to begin the study, you are free to change your mind at any time: withdrawing consent simply means you decide you don't want to answer these questions and/or you don't want us to use your data. In that case, simply close the survey window and return the HIT. Deciding not to participate, or withdrawing consent once you've begun, does not involve any penalty. </p>
+					</div>
+					<div class="col-6 col-lg-6" style="height: 100%">
+						<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Sina Bolouki (<a href="mailto:sina.bolouki@tum.de?subject=4 in a Row">sina.bolouki@tum.de</a>) with your request. You do not need to give a reason for the request.</p>
+						<p>By clicking below, you consent to participate in this task. If you do not wish to continue, please simply close this window and return the HIT.</p>
+						<button id="consentButton" type="button" class="mybutton" style="bottom:30%;left:50%;width:30%" onclick="consented()">Continue</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="popup" id="demography_popup">
+			<h2 style="font-size:4vh;">Demography Questions</h2>
+			<div class="container">
+				<h3 style="text-align: left">Before going further, please answer the questions below: </h3>
+				<h4 style="text-align: left">What is your gender?</h4>
+				<div class="form-group media-left">
+					<div class="form-check media-left">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_0" id="demo_0_0" value="0">
+						<label for="demo_0_0" class="form-check-label" style="margin-left: 5px">Man</label>
+					</div>
+					<div class="form-check media-left">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_0" id="demo_0_1" value="1">
+						<label for="demo_0_1" class="form-check-label" style="margin-left: 5px">Woman</label>
+					</div>
+					<div class="form-check media-left">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_0" id="demo_0_2" value="2">
+						<label for="demo_0_2" class="form-check-label" style="margin-left: 5px">Non-binary</label>
+					</div>
+					<div class="form-check media-left">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_0" id="demo_0_3" value="3">
+						<label for="demo_0_3" class="form-check-label" style="margin-left: 5px">Prefer not to say</label>
+					</div>
+				</div>
+				<h4 style="text-align: left">What is your highest completed education level?</h4>
+				<div class="form-group media-left">
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_0" value="0">
+						<label for="demo_1_0" class="form-check-label" style="margin-left: 5px">No schooling completed</label>
+					</div>
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_1" value="1">
+						<label for="demo_1_1" class="form-check-label" style="margin-left: 5px">Primary education (age: 5–10)</label>
+					</div>
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_2" value="2">
+						<label for="demo_1_2" class="form-check-label" style="margin-left: 5px">Secondary education (age: 11–17)</label>
+					</div>
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_3" value="3">
+						<label for="demo_1_3" class="form-check-label" style="margin-left: 5px">University undergraduate degree/professional equivalent</label>
+					</div>
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_4" value="4">
+						<label for="demo_1_4" class="form-check-label" style="margin-left: 5px">Postgraduate degree</label>
+					</div>
+					<div class="form-check media-left" style="display: table">
+						<input type="radio" class="form-check-input" style="text-align: left" name="demo_1" id="demo_1_5" value="5">
+						<label for="demo_1_5" class="form-check-label" style="margin-left: 5px">Prefer not to say</label>
+					</div>
+				</div>
+				</br>
+				<div class="form-inline media-left">
+					<label style="margin-left: 0%" for="year_input" >What is your age?</label>
+					<input class="form-control" id="year_input" type="number" style="margin-left: 5px">
+				</div>
+				<button id="demography" type="button" class="mybutton" style="bottom:30%;left:50%;width:10%" onclick="check_demography()">Next</button>
+			</div>
+		</div>
+
 		
 		<div class='container-fluid text-center' id="main_game">
 			<div class="clickprompt">Please click where you want to play a piece.</div>
