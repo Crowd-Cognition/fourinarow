@@ -267,11 +267,14 @@ function show_instructions(i,texts,urls,callback,start_text){
 	$('.overlayed').show();
 	$('#instructions').show();
 	$('#instructions p').remove();
-	$('#instructions h4').after("<p>" + texts[i] + "</p>");
+	$('#instructions_text').empty();
+	$('#instructions_text').append("<p style='width: 100%'>"+texts[i]+"</p>");
 	if(urls[i]==""){
 		$('#instructions img').hide()
+		$('#instructions_text').css({"align-items": "center", "vertical-align": "middle", "height": '80%'})
 	}
 	else{
+		$('#instructions_text').css({"height": '10%'})
 		$('#instructions img').show().attr("src",window.get_image_path(urls[i] + ".png"));
 	}
 	if(i==0){
@@ -302,7 +305,9 @@ function initialize_task(_num_games,_num_practice_games,callback){
 	num_games = _num_games
 	num_practice_games = _num_practice_games
 	user_color = 0
-	instructions_text = ["You will be playing a few games called 4-in-a-row against the computer.",
+	instructions_text = ["You will be playing a board game called 4-in-a-row.</br> </br>" +
+							" You will be playing for a few rounds.</br></br>" +
+							" Your opponent in this game is the computer.",
 						 "In this game, you and the computer place black or white pieces on a game board.",
 						 "If you get 4 pieces in a row, you win!",
 						 "You can connect your 4 pieces in any direction, horizontal, vertical or diagonal.",
@@ -360,7 +365,7 @@ async function start_experiment(){
 	// console.log(newResponse.headers)
 	// start_game(0)
 	// create_questionnaire(2);
-	// show_instructions(1,instructions_text,instructions_urls,function(){
+	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
 	// },"Start")
 
