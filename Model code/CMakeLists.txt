@@ -35,6 +35,7 @@ set(SOURCES Peak\ code/heuristic.cpp data_struct.cpp bfs.cpp features.cpp params
 set(EXECUTABLE_NAME compute)
 set(EXECUTABLE_NAME_2 gamma)
 set(EXECUTABLE_NAME_3 csv_create)
+set(EXECUTABLE_NAME_4 planning_depth)
 
 set(LIBRARY_NAME heuristic)
 add_library(${LIBRARY_NAME} ${SOURCES})
@@ -53,5 +54,8 @@ target_link_libraries(${EXECUTABLE_NAME_2} ${LIBRARY_NAME})
 
 add_executable(${EXECUTABLE_NAME_3} params_to_csv.cpp)
 target_link_libraries(${EXECUTABLE_NAME_3} ${LIBRARY_NAME})
+
+add_executable(${EXECUTABLE_NAME_4} planning_depth_writer.cpp)
+target_link_libraries(${EXECUTABLE_NAME_4} ${LIBRARY_NAME})
 
 
