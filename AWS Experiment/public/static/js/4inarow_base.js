@@ -309,18 +309,18 @@ function initialize_task(_num_games,_num_practice_games,callback){
 							" You will be playing for a few rounds.</br></br>" +
 							" Your opponent in this game is the computer.",
 						 "In this game, you and the computer place black or white pieces on a game board.",
-						 "If you get 4 pieces in a row, you win!",
-						 "You can connect your 4 pieces in any direction, horizontal, vertical or diagonal.",
+						 "The goal of the game is to place 4 pieces of your playing color in one consecutive line while preventing the opponent from placing their own 4-piece in line.",
+						 "The 4-piece line can be horizontal, vertical, or diagonal",
 						 "If the computer gets 4-in-a-row before you do, you lose",
-						 "If the board is full and no-one has 4-in-a-row, it's a tie",
-						 "If you were playing black pieces for one game, then the next game you will play white pieces.",
-						 "You will now play " + _num_practice_games.toString() + " practice games. Click start to begin." 
+						 "If the board without any 4-piece line, it is a tie",
+						 "Your playing color will change after each round. (You will play as white if you played as black in the last game, vice versa.)",
+						 "First, You will play " + _num_practice_games.toString() + " practice games. Click \"Start\" to begin."
 						 ]
 
 	instructions_urls = ["",
 						 "black-about-to-win",
 						 "black-won",
-						 "black-won-diagonal",
+						 "three-win",
 						 "",
 						 "draw",
 						 "",
@@ -365,9 +365,9 @@ async function start_experiment(){
 	// console.log(newResponse.headers)
 	// start_game(0)
 	// create_questionnaire(2);
-	// show_instructions(0,instructions_text,instructions_urls,function(){
-	// 	start_game(0)
-	// },"Start")
+	show_instructions(0,instructions_text,instructions_urls,function(){
+		start_game(0)
+	},"Start")
 
 	$('.overlayed').show();
 	$('#consent_popup').show();
