@@ -6,7 +6,8 @@ var game_status = "ready"
 //move_index = 0;
 //last_move = 99;
 var M=9,N=4
-var win_color = "#22ddaa",
+var winning_color = "#22ddaa",
+	losing_color = "#aa0000",
 	square_color = "#999999",
 	highlight_color = "#bbbbbb";
 var data_log =[]
@@ -131,12 +132,12 @@ function check_draw(){
 	return true;
 }
 
-function show_win(color, pieces) {
+function show_win(color, pieces, to_color) {
 	for(i=0; i<pieces.length; i++){
 		if(color==0)
-			$("#tile_" + pieces[i] + " .blackPiece").animate({"backgroundColor": win_color}, 250)
+			$("#tile_" + pieces[i] + " .blackPiece").animate({"backgroundColor": to_color}, 250)
 		else
-			$("#tile_" + pieces[i] + " .whitePiece").animate({"backgroundColor": win_color}, 250)
+			$("#tile_" + pieces[i] + " .whitePiece").animate({"backgroundColor": to_color}, 250)
 	}
 }
 
@@ -162,7 +163,7 @@ function user_move(game_num) {
 		dismissed_click_prompt = true;
 		winning_pieces = check_win(user_color)
 		if(winning_pieces.length==N){
-			show_win(user_color,winning_pieces)
+			show_win(user_color,winning_pieces, winning_color)
 			window.log_data({"event_type": "user win", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "winning_pieces" : winning_pieces, "user_color" : color_string}})
 			$('.headertext h1').text('Game over, you win').css('color', '#000000');
 			end_game(game_num,'win')
@@ -193,7 +194,7 @@ function make_opponent_move(game_num) {
 			winning_pieces = check_win(opponent_color)
 			if(winning_pieces.length==N){
 				window.log_data({"event_type": "opponent win", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "winning_pieces" : winning_pieces, "opponent_color" : color_string}})
-				show_win(opponent_color,winning_pieces)
+				show_win(opponent_color,winning_pieces, losing_color)
 				$('.headertext h1').text('Game over, you lose').css('color', '#000000');
 				end_game(game_num, 'opponent win')
 			}
@@ -310,9 +311,9 @@ function initialize_task(_num_games,_num_practice_games,callback){
 							" Your opponent in this game is the computer.",
 						 "In this game, you and the computer place black or white pieces on a game board.",
 						 "The goal of the game is to place 4 pieces of your playing color in one consecutive line while preventing the opponent from placing their own 4-piece in line.",
-						 "The 4-piece line can be horizontal, vertical, or diagonal",
-						 "If the computer gets 4-in-a-row before you do, you lose",
-						 "If the board without any 4-piece line, it is a tie",
+						 "The 4-piece line can be <b><u>horizontal</u></b>, <b><u>vertical</u></b>, or <b><u>diagonal</u></b>",
+						 "If the computer gets 4-in-a-row before you do, you <b><u>lose</u></b>",
+						 "If the board without any 4-piece line, it is a <b><u>tie</u></b>",
 						 "Your playing color will change after each round. (You will play as white if you played as black in the last game, vice versa.)",
 						 "First, You will play " + _num_practice_games.toString() + " practice games. Click \"Start\" to begin."
 						 ]
@@ -321,7 +322,7 @@ function initialize_task(_num_games,_num_practice_games,callback){
 						 "black-about-to-win",
 						 "black-won",
 						 "three-win",
-						 "",
+						 "opponent-win",
 						 "draw",
 						 "",
 						 ""]
