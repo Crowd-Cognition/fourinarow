@@ -136,11 +136,12 @@ html {
 .leftLabelText {
 	vertical-align:middle;
 	/*position: relative;*/
-	margin: 100% auto 0% auto;
+	margin: 120% auto 0% auto;
 	color: #000000;
 	height:75%;
 	width:75%;
-	z-index:7;
+	font-size: 4vh;
+	z-index:1;
 }
 
 .topLabelTile {
@@ -157,10 +158,11 @@ html {
 .topLabelText {
 	vertical-align:middle;
 	/*position: relative;*/
-	margin: 30% auto 0% auto;
+	margin: 20% auto 0% auto;
 	color: #000000;
 	height:75%;
 	width:75%;
+	font-size: 4vh;
 	z-index:7;
 }
 
