@@ -14,6 +14,7 @@ var data_log =[]
 var start_category = 1
 var dismissed_click_prompt = false;
 var lastresult = "win"
+var attention_check_games = [1, 5, 8]
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -211,6 +212,7 @@ function make_opponent_move(game_num) {
 }
 
 function start_game(game_num){
+	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
 	level = (category-1)*40 + Math.floor(Math.random()*40)
@@ -257,7 +259,11 @@ function end_game(game_num,result){
 			},"Start")
 		}
 		else{
-			start_game(game_num+1)
+			if (attention_check_games.includes(game_num - num_practice_games)){
+				show_attention_check(attention_check_games.indexOf(game_num - num_practice_games), game_num + 1)
+			} else {
+				start_game(game_num + 1)
+			}
 		}
 	})
 }
@@ -300,6 +306,45 @@ function show_instructions(i,texts,urls,callback,start_text){
 			show_instructions(i+1,texts,urls,callback,start_text);
 		});
 	}
+}
+
+function attention_answered(is_correct, attention_id, game_number) {
+	log_data({"event_type": "attention_answered", "event_info" : {"was_correct": is_correct, "attention_id": attention_id}});
+	$('#next_game_col').show();
+	$('#attention_button_col').hide();
+	start_game(game_number)
+}
+
+function show_attention_check(attention_id, game_number) {
+	black_coords = ['111001111111110110111111111010011011', '000000010101000000000100000001000000',
+		'111111011101101111111111111111110101', '011111011010111101101111100110001111',
+		'000001010000000000100001000001000001']
+	right_answers = [true, true, true, false, false]
+	create_board()
+	selected_coord = black_coords[attention_id];
+	right_answer = right_answers[attention_id];
+	for(let i=0; i < selected_coord.length;i++){
+		console.log(selected_coord[i])
+		if(selected_coord[i] == 1) {//BLACK
+			$("#tile_" + i.toString()).append(
+				$("<div>",{"class" : "blackPiece"})
+			).removeClass("tile").addClass("usedTile").off('mouseenter').off('mouseleave').css("backgroundColor", square_color);
+		} else if (selected_coord[i] == 0) {
+			$("#tile_" + i.toString()).append(
+				$("<div>",{"class" : "whitePiece"})
+			).removeClass("tile").addClass("usedTile").off('mouseenter').off('mouseleave').css("backgroundColor", square_color);
+		}
+	}
+	$(".gamecount").text("");
+	$("#next_game_col").hide();
+	$('#attention_button_col').show();
+	$('.headertext h1').text('Which color has more pieces on the board');
+	$('#blackGameButton').off("click").on("click", function(){
+		attention_answered(right_answer, attention_id, game_number)
+	})
+	$('#whiteGameButton').off("click").on("click", function(){
+		attention_answered(!right_answer, attention_id, game_number)
+	})
 }
 
 function initialize_task(_num_games,_num_practice_games,callback){
