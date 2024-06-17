@@ -15,6 +15,7 @@ var start_category = 1
 var dismissed_click_prompt = false;
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
+const is_second_try = true
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -251,7 +252,12 @@ function end_game(game_num,result){
 		user_color = (user_color+1)%2
 		$(".canvas").empty();
 		if(game_num == num_practice_games + num_games-1){
-			window.finish_experiment()
+			if (is_second_try) {
+				create_questionnaire(0)
+			}
+			else {
+				window.finish_experiment()
+			}
 		}
 		else if (game_num == num_practice_games -1){
 			show_instructions(0,instructions_text_after_practice,instructions_urls_after_practice,function(){
@@ -359,7 +365,7 @@ function initialize_task(_num_games,_num_practice_games,callback){
 						 "The 4-piece line can be <b><u>horizontal</u></b>, <b><u>vertical</u></b>, or <b><u>diagonal</u></b>",
 						 "If the computer gets 4-in-a-row before you do, you <b><u>lose</u></b>",
 						 "If the board without any 4-piece line, it is a <b><u>tie</u></b>",
-						 "Your playing color will change after each round. (You will play as white if you played as black in the last game, vice versa.)",
+						 "Your playing color will change after each round. </br> </br> (You will be white if you were black in the last game)",
 						 "First, You will play " + _num_practice_games.toString() + " practice games. Click \"Start\" to begin."
 						 ]
 

@@ -28,7 +28,7 @@ var resp_est = {
 
 var question1 = {
     type: "survey-multi-choice",
-    preamble: '<p> The following statements refer to thoughts and behaviors which may occur to everyone in everyday life.  <p> For each statement, Choose the reply which best seems to fit you and the degree of disturbance <p> which such thoughts or behaviors may create.',
+    preamble: 'The following statements refer to thoughts and behaviors which may occur to everyone in everyday life. For each statement, Choose the reply which best seems to fit you and the degree of disturbance which such thoughts or behaviors may create.',
     questions: [
 
         {
@@ -131,30 +131,54 @@ var question2 = {
     ],
 };
 
-var questionnaires = [resp_est, question1, question2]
+var questionnaires = [question1, question2]
 
-function send_questionnaire_data() {
+function send_questionnaire_data(questionnaire_id) {
 
+    for (var q_id in questionnaires[questionnaire_id].questions){
+        const question_name = "questionnaire" + questionnaire_id + "_" + q_id
+        if ($('input[name='+question_name+']:checked').length == 0){
+            alert("No choice is selected for one of the questionnaire questions" + question_name)
+            return;
+        }
+    }
+    $('.questionnaire_body').empty()
+    var responses = []
+    for (var q_id in questionnaires[questionnaire_id].questions) {
+        const question_name = "questionnaire" + questionnaire_id + "_" + q_id
+        var input_value = $('input[name='+question_name+']:checked').val()
+        responses.push(input_value)
+    }
+    log_data({"event_type": "did_questionnaire", "event_info" : {
+            "questionnaire_id": questionnaire_id,
+            "inputs": responses
+        }})
+    if (questionnaire_id < questionnaires.length - 1) {
+        create_questionnaire(questionnaire_id + 1)
+    } else {
+        window.finish_experiment()
+    }
 }
 
-function create_questionnaire(id) {
+function create_questionnaire(questionnaire_id) {
 
     let body = $('.questionnaire_body')
     $('#main_game').hide()
-    console.log(questionnaires[id].questions)
     // $body.empty()
-    for (var q_id in questionnaires[id].questions) {
-        var question = questionnaires[id].questions[q_id];
-        let text = $('<p></p>').text(question.prompt);
+    var preamble_text = $('<h2></h2>').text(questionnaires[questionnaire_id].preamble);
+    body.append(preamble_text)
+    for (var q_id in questionnaires[questionnaire_id].questions) {
+        var question = questionnaires[questionnaire_id].questions[q_id];
+        let text = $('<p></p>').text(question.prompt).css('font-size', '2vh');
         text.addClass('text-left');
         body.append(text);
-        const question_name = "\"questionnaire" + id + "_" + q_id + "\""
+        const question_name = "questionnaire" + questionnaire_id + "_" + q_id
         var form_group = $('<div> </div>').addClass('form_group media-left');
         for (var o_id in question.options) {
             var option = question.options[o_id];
             var optionDiv = $('<div></div>').addClass('form-check media-left')
             var optionInput = $('<input>').addClass('form-check-input').css({'text-align':'left'})
-                .attr('type', 'radio').attr('name', question_name).attr('id',question_name+"_"+o_id)
+                .attr('type', 'radio').attr('name', question_name).attr('id',question_name+"_"+o_id).attr('value', o_id)
             var optionLabel = $('<label></label>').addClass('form-check-label')
                 .attr('for',question_name+"_"+o_id).text(option).css({'text-align':'left'})
             optionDiv.append(optionInput)
@@ -165,9 +189,14 @@ function create_questionnaire(id) {
         body.append(form_group)
     }
     var next_button = $('<button> </button>').addClass('mybutton').attr('type', 'button').attr('id', 'form_next')
-        .text('Submit');
+        .css({'transform':'translate(100%,0%)'});
+    if (questionnaire_id == questionnaires.length - 1) {
+        next_button.text('Submit')
+    } else {
+        next_button.text('Next')
+    }
     next_button.off("click").on("click", function() {
-        send_questionnaire_data()
+        send_questionnaire_data(questionnaire_id)
     })
     body.append(next_button)
 }

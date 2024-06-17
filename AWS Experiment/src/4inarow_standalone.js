@@ -33,7 +33,7 @@ async function save(data, filename) {
 	let formData = new FormData();
 	formData.append('data', JSON.stringify(data));
 
-	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateData", {
+	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateDataAnanonymous", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		credentials: "include", // include, *same-origin, omit
 		headers:{
@@ -50,7 +50,8 @@ async function save(data, filename) {
 	// 	}
 	// })
 
-	window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
+	// window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
+	$("#end_screen").show()
 }
 
 export function log_data(data){
@@ -69,6 +70,6 @@ $(document).ready(function(){
 	client = generateClient()
 	// user_credentials = "test"
 	//enter_credentials(start_game)
-	initialize_task(10,2,start_experiment)
+	initialize_task(2,1,start_experiment)
 });
 
