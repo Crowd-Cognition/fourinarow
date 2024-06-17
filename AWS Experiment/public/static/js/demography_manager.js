@@ -37,9 +37,10 @@ function check_demography(){
 
     // log demography data
     var question_name = "demo" + "_" + 0
-    var gender_val = $('input[name='+question_name+']:checked').val()
+    var gender_val = $('input[name='+question_name+']:checked').value
     question_name = "demo" + "_" + 1
-    var education_val = $('input[name='+question_name+']:checked').val()
+    var education_val = $('input[name='+question_name+']:checked').value
+    console.log(education_val, gender_val)
     window.log_data({"event_type": "fill demography", "event_info":
             {"gender": gender_val,
             "education": education_val,

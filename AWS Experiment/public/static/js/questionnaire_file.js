@@ -146,7 +146,7 @@ function send_questionnaire_data(questionnaire_id) {
     var responses = []
     for (var q_id in questionnaires[questionnaire_id].questions) {
         const question_name = "questionnaire" + questionnaire_id + "_" + q_id
-        var input_value = $('input[name='+question_name+']:checked').val()
+        var input_value = $('input[name='+question_name+']:checked').value
         responses.push(input_value)
     }
     log_data({"event_type": "did_questionnaire", "event_info" : {
