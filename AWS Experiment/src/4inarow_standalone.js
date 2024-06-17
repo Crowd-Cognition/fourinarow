@@ -33,7 +33,7 @@ async function save(data, filename) {
 	let formData = new FormData();
 	formData.append('data', JSON.stringify(data));
 
-	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateDataAnanonymous", {
+	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateDataAnonymous", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		credentials: "include", // include, *same-origin, omit
 		headers:{
