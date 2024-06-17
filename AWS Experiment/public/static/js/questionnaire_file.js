@@ -142,13 +142,13 @@ function send_questionnaire_data(questionnaire_id) {
             return;
         }
     }
-    $('.questionnaire_body').empty()
     var responses = []
     for (var q_id in questionnaires[questionnaire_id].questions) {
         const question_name = "questionnaire" + questionnaire_id + "_" + q_id
         var input_value = $('input[name='+question_name+']:checked').val()
         responses.push(input_value)
     }
+    $('.questionnaire_body').empty()
     log_data({"event_type": "did_questionnaire", "event_info" : {
             "questionnaire_id": questionnaire_id,
             "inputs": responses

@@ -35,9 +35,11 @@ async function save(data, filename) {
 
 	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateDataAnonymous", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
-		credentials: "include", // include, *same-origin, omit
+		// credentials: "include",
+		mode: "cors",// include, *same-origin, omit
 		headers:{
-		'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-Custom-Header': 'custom-value'
 		},
 		body : new URLSearchParams({'data': JSON.stringify(data)})
 	})
