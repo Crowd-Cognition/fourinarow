@@ -219,3 +219,15 @@ html {
 	background-color:#aaaaaa;
 }
 
+#debriefing p {
+	font-size: 1.5vh;
+}
+
+#debriefing h3 {
+	font-size: 2.3vh;
+}
+
+#debriefing h2 {
+	font-size: 2.7vh;
+}
+
