@@ -156,7 +156,7 @@ function send_questionnaire_data(questionnaire_id) {
     if (questionnaire_id < questionnaires.length - 1) {
         create_questionnaire(questionnaire_id + 1)
     } else {
-        window.finish_experiment()
+        window.show_debriefing()
     }
 }
 

@@ -417,9 +417,9 @@ async function start_experiment(){
 	// console.log(newResponse.headers)
 	// start_game(0)
 	// create_questionnaire(2);
-	show_instructions(0,instructions_text,instructions_urls,function(){
-		start_game(0)
-	},"Start")
+	// show_instructions(0,instructions_text,instructions_urls,function(){
+	// 	start_game(0)
+	// },"Start")
 
 	$('.overlayed').show();
 	$('#consent_popup').show();

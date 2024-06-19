@@ -17,6 +17,12 @@ export function get_image_path(filename){
 	return "static/images/" + filename;
 }
 
+export async function show_debriefing(){
+	$('.overlayed').show()
+	$('#debriefing').show()
+	await save(data_log,"fourinarow_data_" + "test" + ".json")
+}
+
 async function save(data, filename) {
 	var blob = new Blob([JSON.stringify(data)], {type: 'text/csv'});
 	// var elem = window.document.createElement('a');
@@ -53,7 +59,6 @@ async function save(data, filename) {
 	// })
 
 	// window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
-	$("#debriefing").show()
 }
 
 export function log_data(data){
@@ -68,6 +73,7 @@ $(document).ready(function(){
 	window.log_data = log_data
 	window.finish_experiment = finish_experiment
 	window.get_image_path = get_image_path
+	window.show_debriefing = show_debriefing
 	Amplify.configure(amplifyconfig)
 	client = generateClient()
 	// user_credentials = "test"
