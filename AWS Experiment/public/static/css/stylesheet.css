@@ -220,14 +220,31 @@ html {
 }
 
 #debriefing p {
-	font-size: 1.5vh;
+	font-size: 2vh;
 }
 
 #debriefing h3 {
-	font-size: 2.3vh;
+	font-size: 2.5vh;
 }
 
 #debriefing h2 {
-	font-size: 2.7vh;
+	font-size: 3vh;
+}
+
+#debriefing2 p {
+	font-size: 2vh;
+}
+
+#debriefing2 h3 {
+	font-size: 2.5vh;
+}
+
+#debriefing2 h2 {
+	font-size: 3vh;
+}
+
+#questionnaire_body h2 {
+	text-align: center;
+	font-weight: bold;
 }
 

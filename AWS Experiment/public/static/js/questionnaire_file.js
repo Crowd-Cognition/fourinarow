@@ -148,7 +148,7 @@ function send_questionnaire_data(questionnaire_id) {
         var input_value = $('input[name='+question_name+']:checked').val()
         responses.push(input_value)
     }
-    $('.questionnaire_body').empty()
+    $('#questionnaire_body').empty()
     log_data({"event_type": "did_questionnaire", "event_info" : {
             "questionnaire_id": questionnaire_id,
             "inputs": responses
@@ -162,14 +162,15 @@ function send_questionnaire_data(questionnaire_id) {
 
 function create_questionnaire(questionnaire_id) {
 
-    let body = $('.questionnaire_body')
+    let body = $('#questionnaire_body')
     $('#main_game').hide()
     // $body.empty()
     var preamble_text = $('<h2></h2>').text(questionnaires[questionnaire_id].preamble);
     body.append(preamble_text)
+    body.append($('<br><br>'))
     for (var q_id in questionnaires[questionnaire_id].questions) {
         var question = questionnaires[questionnaire_id].questions[q_id];
-        let text = $('<p></p>').text(question.prompt).css('font-size', '2vh');
+        let text = $('<p></p>').text(question.prompt).css('font-size', '2.5vh');
         text.addClass('text-left');
         body.append(text);
         const question_name = "questionnaire" + questionnaire_id + "_" + q_id

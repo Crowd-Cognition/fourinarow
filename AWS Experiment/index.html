@@ -15,6 +15,13 @@
 		<script type="module" src="./src/4inarow_standalone.js"></script>
 		<script src="./static/js/4inarow_base.js"></script>
 	<script src="./static/scripts/Code/makemove.js"></script>
+
+		<script>
+			function debriefing_to_next() {
+				$('#debriefing').hide();
+				$('#debriefing2').show();
+			}
+		</script>
 	
 	<link href = "./static/css/lib/bootstrap-12/bootstrap.min.css" rel = "stylesheet">
 	<link href = './static/css/stylesheet.css' rel='stylesheet'>
@@ -22,8 +29,7 @@
 	</head>
 	<body>
 
-		<div class="questionnaire_body container text-left media-left"></div>
-		<p></p>
+		<div class="container media-left" id="questionnaire_body" style="width: 100%; padding-left: 10%; padding-right: 10%"></div>
 		<div class="overlayed"></div>
 		<div class="popup" id="instructions">
 			<div class="container-fluid" style="height: 100%">
@@ -49,7 +55,7 @@
 					<div class="col-6 col-lg-6" style="height: 100%">
 						<p>Even if you complete the experiment, you are entitled to ask that we discard your data. To do so, please email Sina Bolouki (<a href="mailto:sina.bolouki@tum.de?subject=4 in a Row">sina.bolouki@tum.de</a>) with your request. You do not need to give a reason for the request.</p>
 						<p>By clicking below, you consent to participate in this task. If you do not wish to continue, please simply close this window and return the HIT.</p>
-						<button id="consentButton" type="button" class="mybutton" style="bottom:30%;left:50%;width:30%" onclick="consented()">Continue</button>
+						<button id="consentButton" type="button" class="mybutton" style="bottom:30%;left:50%;width:50%" onclick="consented()">I consent to participate in this study</button>
 					</div>
 				</div>
 			</div>
@@ -169,7 +175,13 @@
 					Email: <a href="mailto:sina.bolouki@gmail.com">sina.bolouki@tum.de</a><br>
 					Phone: +49 152 36844292<br>
 				</p>
+				<br>
+				<button id="debriefingNextButton" type="button" class="mybutton" style="bottom:5%;left:50%;width:50%" onclick="debriefing_to_next()">Next</button>
+			</div>
+		</div>
 
+		<div class="popup" id="debriefing2">
+			<div class="container">
 				<h3>Thank You</h3>
 				<p>Thank you once again for your valuable participation in this study. Your contribution is vital to advancing our understanding of human cognition and decision-making processes.</p>
 
