@@ -15,7 +15,7 @@ var start_category = 1
 var dismissed_click_prompt = false;
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
-const is_second_try = true
+const is_second_try = false
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -256,7 +256,7 @@ function end_game(game_num,result){
 				create_questionnaire(0)
 			}
 			else {
-				window.finish_experiment()
+				window.show_debriefing()
 			}
 		}
 		else if (game_num == num_practice_games -1){
