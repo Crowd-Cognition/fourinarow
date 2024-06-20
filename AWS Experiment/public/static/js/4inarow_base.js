@@ -428,6 +428,9 @@ async function start_experiment(){
 async function consented() {
 	$('#consent_popup').hide()
 	$('#instructions').show();
-	render_demography()
+	show_instructions(0,instructions_text,instructions_urls,function(){
+		start_game(0)
+	},"Start")
+	// render_demography()
 }
 
