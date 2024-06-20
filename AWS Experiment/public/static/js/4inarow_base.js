@@ -422,7 +422,8 @@ async function start_experiment(){
 	// },"Start")
 
 	$('.overlayed').show();
-	$('#consent_popup').show();
+	$('#debriefing').show();
+	// $('#consent_popup').show();
 }
 
 async function consented() {
