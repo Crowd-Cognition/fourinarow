@@ -47,7 +47,7 @@ async function save(data, filename) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'X-Custom-Header': 'custom-value'
 		},
-		body : new URLSearchParams({'data': JSON.stringify(data)})
+		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'0'})
 	})
 
 
@@ -61,9 +61,20 @@ async function save(data, filename) {
 	// window.location.href = "https://decisionstyleapp-c31ebfb6e483.herokuapp.com/games"
 }
 
+export function set_user_id(){
+	var urlParams = new URLSearchParams(window.location.search);
+	var workerID = urlParams.get('workerId');
+	if (workerID === null || workerID === undefined || workerID === '')  {
+		return;
+	}
+	console.log(workerID);
+	data_log.push({'workerID': workerID});
+	user_id = workerID;
+}
+
 export function log_data(data){
 	data["event_time"] = Date.now()
-	data["credentials"] = "test"
+	data["credentials"] = user_id;
 	console.log(data)
 	data_log.push(data)
 	console.log(data_log)
@@ -74,6 +85,7 @@ $(document).ready(function(){
 	window.finish_experiment = finish_experiment
 	window.get_image_path = get_image_path
 	window.show_debriefing = show_debriefing
+	window.set_user_id = set_user_id
 	Amplify.configure(amplifyconfig)
 	client = generateClient()
 	// user_credentials = "test"
