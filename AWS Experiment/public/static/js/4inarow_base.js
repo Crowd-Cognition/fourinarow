@@ -13,6 +13,7 @@ var winning_color = "#22ddaa",
 var data_log =[]
 var start_category = 1
 var dismissed_click_prompt = false;
+var user_id = "test";
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
 const is_second_try = true
@@ -395,6 +396,7 @@ async function start_experiment(){
 	$('#instructions').hide();
 	$('.overlayed').hide();
 	category = start_category
+	window.set_user_id()
 	// const userResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/user", {
 	// 	method: "GET",
 	// 	credentials: "include"// *GET, POST, PUT, DELETE, etc.
