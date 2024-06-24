@@ -47,7 +47,7 @@ async function save(data, filename) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'X-Custom-Header': 'custom-value'
 		},
-		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'0'})
+		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'1'})
 	})
 
 
