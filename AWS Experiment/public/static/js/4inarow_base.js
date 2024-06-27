@@ -168,12 +168,12 @@ function user_move(game_num) {
 		if(winning_pieces.length==N){
 			show_win(user_color,winning_pieces, winning_color)
 			window.log_data({"event_type": "user win", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "winning_pieces" : winning_pieces, "user_color" : color_string}})
-			$('.headertext h1').text('Game over, you win').css('color', '#000000');
+			$('.headertext h1').text('You win!').css('color', '#000000');
 			end_game(game_num,'win')
 		}
 		else if (check_draw()){
 			window.log_data({"event_type": "draw", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "user_color" : color_string}})
-			$('.headertext h1').text('Game over, draw').css('color', '#000000');
+			$('.headertext h1').text('Draw!').css('color', '#000000');
 			end_game(game_num,'draw')
 		}
 		else {
@@ -198,12 +198,12 @@ function make_opponent_move(game_num) {
 			if(winning_pieces.length==N){
 				window.log_data({"event_type": "opponent win", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "winning_pieces" : winning_pieces, "opponent_color" : color_string}})
 				show_win(opponent_color,winning_pieces, losing_color)
-				$('.headertext h1').text('Game over, you lose').css('color', '#000000');
+				$('.headertext h1').text('You lose!').css('color', '#000000');
 				end_game(game_num, 'opponent win')
 			}
 			else if (check_draw()){
 				window.log_data({"event_type": "draw", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "opponent_color" : color_string}})
-				$('.headertext h1').text('Game over, draw').css('color', '#000000');
+				$('.headertext h1').text('Draw!').css('color', '#000000');
 				end_game(game_num, 'draw')
 			}
 			else {
