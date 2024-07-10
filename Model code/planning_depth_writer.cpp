@@ -51,7 +51,7 @@ double compute_planning_depth(peak::heuristic& h, data_struct& dat, int player, 
 }
 
 int main() {
-    std::string filename = "planning_depth.csv";
+    std::string filename = "planning_depth_test.csv";
     std::string header = "Planning Depth";
     int n = 0;
     if (fileExists(filename)) {
@@ -63,10 +63,10 @@ int main() {
     std::ofstream writeFile(filename, std::ios::app);
     data_struct dat;
     peak::heuristic h;
-    mt19937_64 global_generator;
-    global_generator.seed(unsigned(time(0)));
+    mt19937_64 global_generator(unsigned(time(0)));
+    global_generator.seed();
+    h.seed_generator(global_generator);
     const char* input_filename = "../../data_hvh.txt";
-
     int N = 4;
     dat.load_board_file(input_filename);
     cout<<dat.Nboards<<endl;
