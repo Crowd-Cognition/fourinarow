@@ -23,6 +23,16 @@ export async function show_debriefing(){
 	await save(data_log,"fourinarow_data_" + "test" + ".json")
 }
 
+function generate_random_string(length) {
+	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	let result = '';
+	const charactersLength = characters.length;
+	for (let i = 0; i < length; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	return result;
+}
+
 async function save(data, filename) {
 	var blob = new Blob([JSON.stringify(data)], {type: 'text/csv'});
 	// var elem = window.document.createElement('a');
@@ -38,7 +48,7 @@ async function save(data, filename) {
 	console.log(JSON.stringify(data));
 	let formData = new FormData();
 	formData.append('data', JSON.stringify(data));
-
+	user_id = generate_random_string(15);
 	const newResponse = await fetch("https://decisionstyleapp-c31ebfb6e483.herokuapp.com/updateDataTurk", {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		// credentials: "include",
@@ -47,7 +57,7 @@ async function save(data, filename) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'X-Custom-Header': 'custom-value'
 		},
-		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'0'})
+		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'-1'})
 	})
 
 
@@ -90,6 +100,6 @@ $(document).ready(function(){
 	client = generateClient()
 	// user_credentials = "test"
 	//enter_credentials(start_game)
-	initialize_task(10,2,start_experiment)
+	initialize_task(2,1,start_experiment)
 });
 
