@@ -16,7 +16,7 @@ var dismissed_click_prompt = false;
 var user_id = "test";
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
-const is_second_try = true
+const is_second_try = false
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -217,7 +217,8 @@ function start_game(game_num){
 	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
-	level = (category-1)*40 + Math.floor(Math.random()*40)
+	level = (category - 1) * 40 + 20
+	// level = (category-1)*40 + Math.floor(Math.random()*40)
 	if(game_num<num_practice_games){
 		$('.gamecount').text("Practice game " + (game_num+1).toString() + " out of " + num_practice_games.toString());
 	}
@@ -236,11 +237,14 @@ function adjust_level(result){
 	old_level = level
 	if(result=='win'){
 		if(lastresult=='win'){
-			category = Math.min(category+1,5)
+			category = 3
+			// category = Math.min(category+1,5)
 		}
 	}
-	if(result=='opponent win')
-		category=Math.max(category-1,1)
+	if(result=='opponent win') {
+		category = 3
+		// category = Math.max(category - 1, 1)
+	}
 	lastresult = result	
 	window.log_data({"event_type": "adjust level", "event_info" : {"category" : category}})
 }
@@ -419,12 +423,13 @@ async function start_experiment(){
 	// console.log(newResponse.headers)
 	// start_game(0)
 	// create_questionnaire(2);
+	start_game(0);
 	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
 	// },"Start")
 
-	$('.overlayed').show();
-	$('#consent_popup').show();
+	// $('.overlayed').show();
+	// $('#consent_popup').show();
 }
 
 async function consented() {
