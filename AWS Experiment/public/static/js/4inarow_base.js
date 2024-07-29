@@ -183,6 +183,7 @@ function user_move(game_num) {
 }
 
 function make_opponent_move(game_num) {
+	user_color = (user_color + 1)% 2
 	opponent_color = (user_color+1)%2
 	color_string = (opponent_color == 0 ? 'black' : 'white')
 	window.log_data({"event_type": "waiting for opponent", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "opponent_color" : color_string}})
@@ -207,7 +208,7 @@ function make_opponent_move(game_num) {
 				end_game(game_num, 'draw')
 			}
 			else {
-				user_move(game_num)
+				make_opponent_move(game_num)
 			}
 		},1000);
 	},0)
@@ -228,7 +229,7 @@ function start_game(game_num){
 	if (!dismissed_click_prompt) $('.clickprompt').show();
 	window.log_data({"event_type": "start game", "event_info": {"game_num": game_num, "is_practice": game_num<num_practice_games, "level": level, "user_color" : (user_color == 0 ? 'black' : 'white')}})
 	if(user_color==0)
-		user_move(game_num)
+		make_opponent_move(game_num)
 	else
 		make_opponent_move(game_num)
 }
@@ -252,8 +253,8 @@ function adjust_level(result){
 function end_game(game_num,result){
 	window.log_data({"event_type": "end game", "event_info" : {"game_num" : game_num, "result" : result,"level" : level}})
 	adjust_level(result)
-	$("#nextgamebutton").show().css({"display" :"inline"}).off("click").on("click",function(){
-		$("#nextgamebutton").hide()
+	// $("#nextgamebutton").show().css({"display" :"inline"}).off("click").on("click",function(){
+	// 	$("#nextgamebutton").hide()
 		user_color = (user_color+1)%2
 		$(".canvas").empty();
 		if(game_num == num_practice_games + num_games-1){
@@ -263,20 +264,22 @@ function end_game(game_num,result){
 			else {
 				window.finish_experiment()
 			}
+		} else {
+			start_game(game_num + 1)
 		}
-		else if (game_num == num_practice_games -1){
-			show_instructions(0,instructions_text_after_practice,instructions_urls_after_practice,function(){
-				start_game(game_num+1)
-			},"Start")
-		}
-		else{
-			if (attention_check_games.includes(game_num - num_practice_games)){
-				show_attention_check(attention_check_games.indexOf(game_num - num_practice_games), game_num + 1)
-			} else {
-				start_game(game_num + 1)
-			}
-		}
-	})
+		// else if (game_num == num_practice_games -1){
+		// 	show_instructions(0,instructions_text_after_practice,instructions_urls_after_practice,function(){
+		// 		start_game(game_num+1)
+		// 	},"Start")
+		// }
+		// else{
+		// 	if (attention_check_games.includes(game_num - num_practice_games)){
+		// 		show_attention_check(attention_check_games.indexOf(game_num - num_practice_games), game_num + 1)
+		// 	} else {
+		// 		start_game(game_num + 1)
+		// 	}
+		// }
+	// })
 }
 
 function show_instructions(i,texts,urls,callback,start_text){
