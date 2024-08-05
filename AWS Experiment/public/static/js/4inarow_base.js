@@ -212,7 +212,7 @@ function make_opponent_move(game_num, fixed_opp) {
 			else {
 				make_opponent_move(game_num, !fixed_opp)
 			}
-		},1000);
+		},0);
 	},0)
 }
 
