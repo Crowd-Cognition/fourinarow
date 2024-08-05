@@ -11,13 +11,13 @@ var winning_color = "#22ddaa",
 	square_color = "#999999",
 	highlight_color = "#bbbbbb";
 var data_log =[]
-var start_category = 3
+var start_category = 2
 var dismissed_click_prompt = false;
 var user_id = "test";
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
 const is_second_try = false
-var opp2_level = 100;
+var opp2_level = 50;
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -220,7 +220,7 @@ function start_game(game_num){
 	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
-	opp1_level = 100
+	opp1_level = 50
 	// opp1_level = (category - 1) * 40 + 20
 	opp2_level = (category-1)*40 + Math.floor(Math.random()*40)
 	if(game_num<num_practice_games){

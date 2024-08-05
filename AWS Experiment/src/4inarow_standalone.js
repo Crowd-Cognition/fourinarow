@@ -57,7 +57,7 @@ async function save(data, filename) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			'X-Custom-Header': 'custom-value'
 		},
-		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'-4'})
+		body : new URLSearchParams({'user_id':user_id,'data': JSON.stringify(data), 'exp_id':'-5'})
 	})
 
 
@@ -100,6 +100,6 @@ $(document).ready(function(){
 	client = generateClient()
 	// user_credentials = "test"
 	//enter_credentials(start_game)
-	initialize_task(28,2,start_experiment)
+	initialize_task(30,1,start_experiment)
 });
 
