@@ -232,7 +232,7 @@ function start_game(game_num){
 	}
 	if (!dismissed_click_prompt) $('.clickprompt').show();
 	window.log_data({"event_type": "start game", "event_info": {"game_num": game_num, "is_practice": game_num<num_practice_games, "level": opp2_level, "user_color" : (user_color == 0 ? 'black' : 'white')}})
-	if(user_color==0)
+	if(user_color==1)
 		make_opponent_move(game_num, true)
 	else
 		make_opponent_move(game_num, false)
