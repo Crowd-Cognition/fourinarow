@@ -221,6 +221,7 @@ function start_game(game_num){
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
 	opp1_level = 110
+	// opp2_level = 110
 	// opp1_level = (category - 1) * 40 + 20
 	opp2_level = (category-1)*40 + Math.floor(Math.random()*40)
 	if(game_num<num_practice_games){
@@ -258,8 +259,9 @@ function end_game(game_num,result){
 	adjust_level(result)
 	// $("#nextgamebutton").show().css({"display" :"inline"}).off("click").on("click",function(){
 	// 	$("#nextgamebutton").hide()
-		user_color = (user_color+1)%2
-		$(".canvas").empty();
+	// 	user_color = (user_color+1)%2
+	user_color = 0;
+	$(".canvas").empty();
 		if(game_num == num_practice_games + num_games-1){
 			if (is_second_try) {
 				create_questionnaire(0)
@@ -434,7 +436,6 @@ async function start_experiment(){
 	// show_instructions(0,instructions_text,instructions_urls,function(){
 	// 	start_game(0)
 	// },"Start")
-
 	// $('.overlayed').show();
 	// $('#consent_popup').show();
 }
