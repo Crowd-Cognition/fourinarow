@@ -221,7 +221,7 @@ function start_game(game_num){
 	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
-	opp1_level = 150
+	opp1_level = 175
 	// opp2_level = 110
 	// opp1_level = (category - 1) * 40 + 20
 	opp2_level = (category-1)*40 + Math.floor(Math.random()*40)
