@@ -17,7 +17,7 @@ var user_id = "test";
 var lastresult = "win"
 var attention_check_games = [1, 5, 8]
 const is_second_try = false
-var opp2_level = 110;
+var opp2_level = 100;
 
 function create_board() {
 	bp = new Array(M*N).fill(0)
@@ -221,7 +221,7 @@ function start_game(game_num){
 	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
-	opp1_level = 50
+	opp1_level = 150
 	// opp2_level = 110
 	// opp1_level = (category - 1) * 40 + 20
 	opp2_level = (category-1)*40 + Math.floor(Math.random()*40)
