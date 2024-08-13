@@ -1,5 +1,5 @@
 // import {log_data, finish_experiment} from'./4inarow_standalone'
-var b,bp,wp,user_color,m,num_games,num_practice_games
+var b,bp,wp,fixed_color,m,num_games,num_practice_games
 var tiles = [];
 var game_status = "ready"
 //game_status = "ready";
@@ -11,7 +11,7 @@ var winning_color = "#22ddaa",
 	square_color = "#999999",
 	highlight_color = "#bbbbbb";
 var data_log =[]
-var start_category = 2
+var start_category = 3
 var dismissed_click_prompt = false;
 var user_id = "test";
 var lastresult = "win"
@@ -146,7 +146,7 @@ function show_win(color, pieces, to_color) {
 }
 
 function user_move(game_num) {
-	color_string = (user_color == 0 ? 'black' : 'white')
+	color_string = (fixed_color == 0 ? 'black' : 'white')
 	window.log_data({"event_type": "your turn", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "user_color" : color_string}})
 	$('.headertext h1').text('Your turn. You play ' + color_string + ".");
 	$('.canvas, .tile').css('cursor', 'pointer');
@@ -161,13 +161,13 @@ function user_move(game_num) {
 		$('.canvas, .canvas div').css('cursor', 'default');
 		tile_ind = parseInt(e.target.id.replace("tile_", ""));
 		window.log_data({"event_type": "user move", "event_info" : {"tile" : tile_ind, "bp" : bp.join(""), "wp": wp.join(""), "user_color" : color_string}})
-		add_piece(tile_ind,user_color);
-		show_last_move(tile_ind, user_color);
+		add_piece(tile_ind,fixed_color);
+		show_last_move(tile_ind, fixed_color);
 		$(".clickprompt").hide();
 		dismissed_click_prompt = true;
-		winning_pieces = check_win(user_color)
+		winning_pieces = check_win(fixed_color)
 		if(winning_pieces.length==N){
-			show_win(user_color,winning_pieces, winning_color)
+			show_win(fixed_color,winning_pieces, winning_color)
 			window.log_data({"event_type": "user win", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "winning_pieces" : winning_pieces, "user_color" : color_string}})
 			$('.headertext h1').text('You win!').css('color', '#000000');
 			end_game(game_num,'win')
@@ -183,10 +183,11 @@ function user_move(game_num) {
 	});
 }
 
-function make_opponent_move(game_num, fixed_opp) {
-	user_color = (user_color + 1)% 2
-	opponent_color = (user_color+1)%2
-	color_string = (opponent_color == 0 ? 'black' : 'white')
+function make_opponent_move(game_num, fixed_opp, color) {
+	// fixed_color = (fixed_color + 1)% 2
+	// opponent_color = (fixed_color+1)%2
+	color_string = (color? 'white' : 'black')
+	opponent_color = color ? 1 : 0
 	window.log_data({"event_type": "waiting for opponent", "event_info" : {"bp" : bp.join(""), "wp": wp.join(""), "opponent_color" : color_string}})
 	$('.headertext h1').text('Waiting for opponent').css('color', '#333333');
 	setTimeout(function(){
@@ -210,7 +211,7 @@ function make_opponent_move(game_num, fixed_opp) {
 				end_game(game_num, 'draw')
 			}
 			else {
-				make_opponent_move(game_num, !fixed_opp)
+				make_opponent_move(game_num, !fixed_opp, !color)
 			}
 		},0);
 	},0)
@@ -220,22 +221,22 @@ function start_game(game_num){
 	$("#attention_button_col").hide();
 	window.log_data({"event_type": "start game", "event_info" : {"game_num" : game_num}})
 	create_board()
-	opp1_level = 110
+	opp1_level = 50
 	// opp2_level = 110
 	// opp1_level = (category - 1) * 40 + 20
 	opp2_level = (category-1)*40 + Math.floor(Math.random()*40)
-	if(game_num<num_practice_games){
+	if(game_num<num_practice_games) {
 		$('.gamecount').text("Practice game " + (game_num+1).toString() + " out of " + num_practice_games.toString());
 	}
 	else{
 		$('.gamecount').text("Game " + (game_num-num_practice_games+1).toString() + " out of " + num_games.toString());
 	}
 	if (!dismissed_click_prompt) $('.clickprompt').show();
-	window.log_data({"event_type": "start game", "event_info": {"game_num": game_num, "is_practice": game_num<num_practice_games, "level": opp2_level, "user_color" : (user_color == 0 ? 'black' : 'white')}})
-	if(user_color==1)
-		make_opponent_move(game_num, true)
+	window.log_data({"event_type": "start game", "event_info": {"game_num": game_num, "is_practice": game_num<num_practice_games, "level": opp2_level, "user_color" : (fixed_color == 0 ? 'black' : 'white')}})
+	if(fixed_color==0)
+		make_opponent_move(game_num, true, false)
 	else
-		make_opponent_move(game_num, false)
+		make_opponent_move(game_num, false, false)
 }
 
 function adjust_level(result){
@@ -260,7 +261,7 @@ function end_game(game_num,result){
 	// $("#nextgamebutton").show().css({"display" :"inline"}).off("click").on("click",function(){
 	// 	$("#nextgamebutton").hide()
 	// 	user_color = (user_color+1)%2
-	user_color = 0;
+	fixed_color = (fixed_color + 1)%2;
 	$(".canvas").empty();
 		if(game_num == num_practice_games + num_games-1){
 			if (is_second_try) {
@@ -369,7 +370,7 @@ function show_attention_check(attention_id, game_number) {
 function initialize_task(_num_games,_num_practice_games,callback){
 	num_games = _num_games
 	num_practice_games = _num_practice_games
-	user_color = 0
+	fixed_color = 0
 	category = start_category
 	instructions_text = ["You will be playing a board game called 4-in-a-row.</br> </br>" +
 							" You will be playing for a few rounds.</br></br>" +
